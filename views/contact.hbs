@@ -869,7 +869,9 @@ $(window).on('keydown', function(e) {
     return false;
   }
 });
-var url="http://localhost:3000";
+{{!-- var url="http://localhost:3000"; --}}
+var url="https://dropling.onrender.com";
+
 var socket=io('/user',{
   auth:{
     toid:localStorage.getItem(("toid")),
