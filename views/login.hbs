@@ -336,7 +336,7 @@ var ds={ pass:"",email:"",value:"" };
      function isloggedin(){
       var l=localStorage.getItem("userid");
 
-      if( l=="null" ){
+      if( l=="null" || l==null || l=="undefined" || l==undefined ){
 
       }
       else{
