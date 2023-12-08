@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mobile Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 16%;
+  height: 100%;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 60%;
+  width: 25%;
+  left: 4px;
+  bottom: 4px;
+  background-color: rgb(245, 245, 245);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #248df6;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+      body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: black;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  margin: 10% auto;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #32465a;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  padding: 8px 15px;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 20px;
+  text-align: center;
+  flex-grow: 0.8;
+}
+
+.settings-content {
+  background-color: #32465a;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.settings-content p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-content p input[type="radio"] {
+  order: 1;
+}
+
+.settings-content p span {
+  margin-right: 10px;
+}
+#logout {
+  background-color: rgb(243, 6, 6);
+  color: #ffffff;
+  height: 180%;
+  width: 30%;
+  border-radius: 20%;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <button class="back-button" onclick="gotocontact()">&larr;</button>
+        <h1 class="page-title">Settings</h1>
+      </header>
+
+      <div class="settings-content">
+        <p><span>Online Status(beta)</span> <label class="switch">
+  <input type="checkbox" checked>
+  <span class="slider round"></span>
+</label></p>
+
+<p><span>Autoscroll</span> <label class="switch">
+  <input id="scrollvalue" onclick="changesettings(`scrollvalue`)" type="checkbox"  checked >
+  <span class="slider round"></span>
+</label></p>
+
+        <p><span>Send Sound</span> <label class="switch">
+  <input id="soundvalue" onclick="changesettings(`soundvalue`)" type="checkbox" checked >
+  <span class="slider round"></span>
+</label></p>
+        <p onclick="logout()"> <input type="submit" value="Log Out" id="logout"/></p>
+        
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+   function gotocontact() {
+  
+    window.location.replace("contact");
+  }
+  function changesettings(a){
+    if(localStorage.getItem(a)==1){
+    localStorage.setItem(a,0);
+
+      //document.getElementById(a).value=0;
+    }
+    else{
+     // document.getElementById(a).value=1;
+    localStorage.setItem(a,1);
+
+
+    }
+    console.log(a+document.getElementById(a).value);
+  }
+
+  var allsettings=["scrollvalue","soundvalue"];
+  function showsettings(){
+    for(var i=0;i<allsettings.length;i++){
+      var val=localStorage.getItem(allsettings[i]);
+      if(val==0){
+        document.getElementById(allsettings[i]).checked=false;
+      }
+      else{
+        document.getElementById(allsettings[i]).checked=true;
+
+      }
+    }
+    }
+  showsettings();
+  function logout(){
+    localStorage.setItem("userid",null);
+    localStorage.setItem("scrollvalue",null);
+    localStorage.setItem("soundvalue",null);
+    localStorage.setItem("email",null);
+    localStorage.setItem("about",null);
+    localStorage.setItem("username",null);
+    localStorage.setItem("tousername",null);
+    localStorage.setItem("toid",null);
+    localStorage.setItem("allcontacts",null);
+    window.location.replace("login");
+  }
+</script>

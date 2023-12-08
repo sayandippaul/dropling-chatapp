@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      outline: none;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #000000;
+    }
+
+    .container {
+      position: relative;
+      width: 430px;
+      height: 900px;
+      left: 50%;
+      margin: 0px auto;
+      margin-left: -205px;
+      display: inline-block;
+    }
+
+    div.app {
+      position: absolute;
+      width: 380px;
+      height: 700px;
+      background: #5850c0;
+      background-image: url("chatpage/chatappbackground8.png");
+      background-repeat: no-repeat;
+  object-fit: cover;
+  background-size: cover;
+      margin-top: 30px;
+    }
+
+    div.app:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      display: inline-block;
+      box-shadow: inset 0 80px 85px -35px #3c33b0;
+      z-index: 0;
+    }
+
+    div.app:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      display: inline-block;
+      bottom: 0;
+      box-shadow: inset 0 -80px 85px -35px #3c33b0;
+      z-index: 0;
+    }
+
+    div.app div.head {
+      z-index: 1;
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 50px;
+      line-height: 48px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.7);
+
+      background: #271c5d;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: inset 0 -15px 35px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    div.head span.title {
+      position: absolute;
+      width: 100%;
+      display: inline-block;
+      left: 0;
+      font-size: 16px;
+      font-weight: 500;
+      margin-top: 2px;
+      color: #fff;
+    }
+
+    div.head span.messages-notification {
+      position: relative;
+      float: left;
+      font-size: 18px;
+      font-weight: normal;
+      margin-left: 15px;
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    div.head span.messages-notification span.count {
+      position: absolute;
+      font-size: 10px;
+      width: 17px;
+      height: 17px;
+      display: inline-block;
+      background: #f42052;
+      line-height: 17px;
+      border-radius: 100%;
+      margin-top: 6px;
+      margin-left: -10px;
+    }
+
+    div.head span.create-new {
+      float: right;
+      font-size: 17px;
+      font-weight: normal;
+      margin-right: 15px;
+      color: #fff;
+      margin-top: 2px;
+    }
+
+    .clearfix::after {
+      content: '';
+      clear: both;
+      display: table;
+    }
+
+    div.search-bar {
+      position: relative;
+      margin-top: 15px;
+      text-align: center;
+      z-index: 1;
+    }
+
+    div.search-bar .ip-search {
+      width: 85%;
+      border: none;
+      font-size: 16px;
+      padding: 10px 15px;
+      color: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 50px;
+      border: 1px solid rgba(60, 51, 176, 0.7);
+      box-shadow: inset 0 25px 25px -15px rgba(60, 51, 176, 0.15);
+    }
+
+    div.search-bar .ip-search::placeholder {
+      color: rgba(255, 255, 255, 0.8);
+      letter-spacing: 1px;
+      font-size: 14px;
+    }
+
+    div.search-bar i.fa {
+      position: absolute;
+      right: 0;
+      margin-right: 25px;
+      margin-top: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 12px;
+    }
+
+    .friend-list {
+      margin-top: 35px;
+    }
+
+    .friend-list ul li {
+      position: relative;
+      list-style: none;
+      float: left;
+      width: 20%;
+      text-align: center;
+    }
+
+    .friend-list ul li img {
+      border-radius: 100%;
+      border: 3px solid rgba(255, 255, 255, 1);
+    }
+
+    .friend-list ul li:nth-child(2n+1) img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .friend-list ul li:nth-child(2n+2) img {
+      width: 50px;
+      height: 50px;
+      transform: translateY(-10%);
+    }
+
+    .friend-list ul li:nth-child(3) img {
+      width: 70px;
+      height: 70px;
+      transform: translateY(-20%);
+    }
+
+    .friend-list ul li:nth-child(2n+1) img,
+    .friend-list ul li:nth-child(2n+1) span.name {
+      opacity: 0.4;
+    }
+
+    .friend-list ul li:nth-child(2n+2) img,
+    .friend-list ul li:nth-child(2n+2) span.name {
+      opacity: 0.7;
+    }
+
+    .friend-list ul li.active img,
+    .friend-list ul li.active span.name {
+      opacity: 1;
+    }
+
+    .friend-list ul li.active img {
+      box-shadow: 1px 1px 0 rgba(39, 28, 93, 0.5),
+        -1px -1px 0 rgba(39, 28, 93, 0.5),
+        0 0 35px rgba(255, 255, 255, 0.3);
+    }
+
+    .friend-list ul li span.name {
+      position: relative;
+      width: 100%;
+      left: 0;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .friend-list ul li.active span.name {
+      top: -7px;
+    }
+
+    .friend-list ul li span.name span.status {
+      display: block;
+      text-transform: none;
+      font-weight: 300;
+      font-size: 8px;
+      color: rgb(255, 255, 255);
+    }
+
+    .friend-list ul li.active span.name span.status {
+      font-size: 9px;
+    }
+
+    .friend-list ul li:nth-child(2n+1) span.messages span.count {
+      position: absolute;
+      font-size: 10px;
+      width: 17px;
+      height: 17px;
+      display: inline-block;
+      background: #f42052;
+      z-index: 10;
+      line-height: 17px;
+      border-radius: 100%;
+      margin-top: -2px;
+      right: 0;
+      margin-right: 10px;
+      color: #fff;
+    }
+
+    .friend-list ul li:nth-child(2n+2) span.messages span.count {
+      position: absolute;
+      z-index: 10;
+      font-size: 10px;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      background: #f42052;
+      line-height: 20px;
+      border-radius: 100%;
+      margin-top: -10px;
+      right: 0;
+      margin-right: 7px;
+      color: #fff;
+    }
+
+    .friend-list ul li.active span.messages,
+    .friend-list ul li span.messages.hide {
+      display: none;
+    }
+
+    div.chat-messages {
+      position: relative;
+      margin-top: 15px;
+      z-index: 10;
+    }
+
+    div.chat-messages div.chat {
+      position: relative;
+      width: 260px;
+      height: 320px;
+      background: #fcfcfe;
+      background-image: url("chatpage/chatappbackground8.png");
+      background-repeat: no-repeat;
+  object-fit: cover;
+  background-size: cover;
+     
+      left: 50%;
+      margin-left: -150px;
+      padding: 20px;
+      border-radius: 5px;
+      font-size: 15px;
+      overflow-y: scroll;
+      overflow-anchor: bottom;
+box-shadow: 30px 0 0 -15px rgb(44, 44, 111),
+        60px 0 0 -30px black,
+        -30px 0 0 -15px rgb(44, 44, 111),
+        -60px 0 0 -30px black,
+        0 0 25px rgba(0, 0, 0, 0.5);
+  
+        }
+
+
+          div.chat-messages div.chat::-webkit-scrollbar{
+    display: none;
+  }
+
+    div.chat div.chat-content>span {
+      margin-bottom: 12px;
+    }
+
+    div.chat div.chat-content span.friend {
+      position: relative;
+      width: 70%;
+      height: auto;
+      display: inline-block;
+      background: #fff;
+
+      padding: 10px;
+      padding-bottom: 25px;
+      box-shadow: 2px 2px 20px -2px rgba(60, 51, 176, 0.2);
+      color: rgb(255, 255, 255);
+      font-size: 12px;
+    }
+
+    div.chat div.chat-content span.friend.first {
+      border-radius: 15px 15px 15px 2px;
+      /* color: rgba(60,51,176,1); */
+      background: #57db87;
+      background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+
+
+    }
+
+    div.chat div.chat-content span.friend.last {
+      /* color: #f42052; */
+      /* background: #5850c0; */
+      background: #57db87;
+      background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+
+      border-radius: 2px 15px 15px 15px;
+    }
+
+    div.chat div.chat-content span.friend span.time {
+      position: absolute;
+      display: block;
+      right: 0;
+      margin-top: 5px;
+      margin-right: 10px;
+      font-size: 10px;
+      font-weight: 500;
+      color: rgb(255, 255, 255);
+    }
+
+    div.chat div.chat-content span.you {
+      position: relative;
+      float: right;
+      width: 70%;
+      height: auto;
+      background: #5850c0;
+      display: inline-block;
+      padding: 10px;
+      padding-bottom: 25px;
+      color: #fff;
+      color: #000000;
+      font-size: small;
+background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
+      box-shadow: 2px 2px 20px rgba(60, 51, 176, 0.2),
+        inset -10px -10px 55px rgba(255, 255, 255, 0.1);
+    }
+
+    div.chat div.chat-content span.you span.time {
+      position: absolute;
+      display: block;
+      right: 0;
+      margin-top: 5px;
+      margin-right: 10px;
+      font-size: 10px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    div.chat div.chat-content span.you.first {
+      border-radius: 15px 15px 2px 15px;
+    }
+
+    div.chat div.chat-content span.you.last {
+      border-radius: 15px 2px 15px 15px;
+    }
+
+    div.msg-box {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      border-top: 1px solid rgba(60, 51, 176, 0.1);
+      overflow: hidden;
+    }
+
+    .ip-msg {
+      width: 67%;
+      position: relative;
+      margin-top: 620px;
+      font-size: 14px;
+      padding: 15px;
+      padding-right: 3%;
+      color: rgba(0, 0, 0, 0.9);
+      color: rgb(0, 0, 0);
+      font-weight: bolder;
+      border: 2 px solid black;
+      margin-left: 5px;
+      /* background: rgba(252, 251, 251, 0.03); */
+      background-color: #fcfcfe;
+      border-radius: 10%;
+      
+background-color: #60dfcd;
+background-image: linear-gradient(315deg, #60dfcd 0%, #1e9afe 74%);
+
+
+
+
+    }
+
+    .ip-msg::placeholder {
+      color: rgb(0, 0, 0);
+      font-weight: bolder;
+    }
+
+    div.msg-box span.btn-group {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin-top: 14px;
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    div.msg-box span.btn-group i {
+      color: rgba(60, 51, 176, 1);
+      font-size: 18px;
+      padding: 0 7px;
+    }
+
+    div.footer {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      z-index: 10;
+      background: #271c5d;
+      border-top: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: inset 0 15px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    div.footer ul li {
+      list-style: none;
+      float: left;
+      width: 20%;
+      display: inline-block;
+      padding: 18px 0;
+      font-size: 18px;
+      text-align: center;
+      color: #8b86ed;
+    }
+
+    div.footer ul li.active {
+      color: #fff;
+      box-shadow: inset 0 -6px 0 rgba(139, 134, 237, 0.8),
+        inset 0 -25px 25px -10px rgba(139, 134, 237, 0.2);
+    }
+
+
+
+
+
+
+
+
+    .yt {
+      position: fixed;
+      padding: 7px 10px 3px 10px;
+      top: 5px;
+      right: 5px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 7px;
+    }
+
+    .yt:hover {
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .edithr {
+      margin-top: 3%;
+      margin-bottom: 4%;
+    }
+
+    #sendbutton {
+      position: relative;
+      width: 10%;
+      font-size: 14px;
+      padding: 15px;
+      /* background: rgba(252, 251, 251, 0.03); */
+      background: none;
+      border-radius: 10%;
+      background-color: #182b3a;
+background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
+
+
+    }
+
+    #swipe {
+      border-radius: 15%;
+      color: white;
+      padding: 4%;
+      font-size: xx-small;
+background-color: #182b3a;
+background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
+background-color: #2234ae;
+background-image: linear-gradient(315deg, #2234ae 0%, #191714 74%);
+
+
+    }
+    #showswipe{
+      width:77%;
+      height:15px;
+      background:black;
+      color:white;
+      border-radius: 0%;
+      font-size: smaller;
+      padding: 5px;
+      padding-left: 15px;
+      display:none;
+      margin-left: 7px;
+      margin-top: -5%;
+background-color: #2234ae;
+background-image: linear-gradient(315deg, #2234ae 0%, #191714 74%);
+     
+background-color: #7a7adb;
+background-image: linear-gradient(315deg, #7a7adb 0%, #170e13 74%);
+
+       
+      
+
+
+    }
+    #closeswipe{
+      visibility: hidden;
+    position: relative;margin-left:80%;margin-top:-30%;color:white;
+    }
+    #showtyping{
+      visibility: hidden;
+    }
+    .typingIndicatorContainer {
+  display: flex;
+  flex: none;
+  align-items: flex-end;
+  margin: $spacing4 0;
+}
+
+.typingIndicatorBubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 5px;
+  margin: 0px 12px;
+  margin-bottom: -12px;
+  border-radius: 12px;
+background: none;  
+}
+
+.typingIndicatorBubbleDot {
+
+  width: 4px;
+  height: 4px;
+  margin-right: 4px;
+  background-color: aqua;
+  border-radius: 50%;
+  animation-name: bounce;
+  animation-duration: 1.3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.typingIndicatorBubbleDot:first-of-type {
+  margin: 0px 4px;
+}
+
+.typingIndicatorBubbleDot:nth-of-type(2) {
+  animation-delay: 0.15s;
+}
+
+.typingIndicatorBubbleDot:nth-of-type(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+    .redtogreen{
+      width:15px;height:2px;border-radius:50%;
+      background-image: url("chatpage/redtick.png");
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 100% 100%;
+ 
+    }
+
+
+
+    .slider {
+ 
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+
+  background-color: #000000; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  /* Slider handle height */
+  background-color: #000000; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+
+
+
+#range1 {
+  -webkit-appearance: none;
+  appearance: none; 
+  width: 60%;
+  cursor: pointer;
+  outline: none;
+  overflow-x: hidden;
+  border-radius: 16px;
+}
+
+#range1::-webkit-slider-runnable-track {
+  height: 10px;
+  background: #000000;
+  border-radius: 10px;
+}
+
+#range1::-moz-range-track {
+  height: 5px;
+  background: #ccc;
+  border-radius: 16px;
+}
+
+#range1::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none; 
+  height: 10px;
+  width: 10px;
+  background-color: #000000;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  box-shadow: -407px 0 0 400px #f50;
+}
+
+#range1::-moz-range-thumb {
+  height: 10px;
+  width: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #f50;
+  box-shadow: -407px 0 0 400px #f50;
+}
+
+
+#musicplayer{
+ background-image: url(demopage/appback1.png);
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 98% 100%;
+           
+ margin-left:5%;
+ height:105px;margin-top:-5%;
+ width:60%;
+ border-radius:10%;
+       
+}
+
+#musicplayernew{
+ background-image: url(demopage/appback2.png);
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 98% 100%;
+           
+ margin-left:5%;
+ height:105px;margin-top:-5%;
+ width:60%;
+ border-radius:10%;
+ border: 0.35rem solid;
+  
+  border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+  animation: borderRotate var(--d) linear infinite forwards;
+       
+}
+.musicplayernew{
+ background-image: url(demopage/appback2.png);
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 98% 100%;
+           
+ margin-left:5%;
+ height:105px;margin-top:-5%;
+ width:60%;
+ border-radius:10%;
+ border: 0.35rem solid;
+  
+  border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+  animation: borderRotate var(--d) linear infinite forwards;
+       
+}
+
+#musicshow{
+  margin-top:5%;
+  height:22%;
+  margin-left:-20%;
+  width:65%;
+  border-radius:10%;
+  margin-right:-20%;
+  padding: 5px;
+  padding-right: 45px;
+  color: white;
+  font-weight: bolder;
+}
+.musicupload{
+  width:6%;margin-right:-8%;color: aqua;
+}
+
+.musiccontrol{
+  width: 90%;height:30px;margin-top:5%;
+}
+#swipehr{
+  visibility: hidden;
+}
+
+
+.center {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.wave {
+  width: 5px;
+  height: 100px;
+  background: linear-gradient(45deg, cyan, #fff);
+  margin: 10px;
+  animation: wave 1s linear infinite;
+  border-radius: 20px;
+}
+.wave:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.wave:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.wave:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.wave:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.wave:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.wave:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.wave:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.wave:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.wave:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+
+     audio::-webkit-media-controls-panel {
+     background-image: url(demopage/appback7.png);
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 100% 140%;
+ 
+
+     color: #eee4e4;
+     }
+
+
+     .seen{
+
+      width:15px;height:2px;border-radius:50%;
+      background-color: #000000;
+      background-image: url("chatpage/greentick6.png");
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 100% 100%;
+ 
+       -webkit-animation-duration: 5s;
+                        animation-duration: 5s;
+                        -webkit-animation-fill-mode: both;
+                        animation-fill-mode: both;
+                    
+
+  
+            animation-name: fadeInOut;
+    
+           }
+            @keyframes fadeInOut {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+           
+           .tick{
+      width:15px;height:2px;border-radius:50%;
+      float: left;
+      margin-left: -180px;
+      margin-top: -10%;
+      width: 20px;
+      height: 20px;
+       background-image: url("chatpage/swipeicon.png");
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 100% 100%;
+ 
+     }
+     .tickothers{
+                          width:20px;height:20px;border-radius:50%;background:aqua;
+background-image: url("chatpage/swipeicon.png");
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 100% 100%;
+            float:right;
+            margin-right: -30px;
+          transform: rotateX(180deg);
+          transform: rotateY(180deg);
+     }
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 90deg;
+  inherits: true;
+}
+
+@property --gradX {
+  syntax: '<percentage>';
+  initial-value: 50%;
+  inherits: true;
+}
+
+@property --gradY {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: true;
+}
+
+
+:root {
+  --d: 2500ms;
+  --angle: 90deg;
+  --gradX: 100%;
+  --gradY: 50%;
+  --c1: rgba(168, 239, 255, 1);
+  --c2: rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+@keyframes borderRotate {
+  100% {
+    --angle: 420deg;
+  }
+}
+
+@keyframes borderRadial {
+  20% {
+    --gradX: 100%;
+    --gradY: 50%;
+  }
+  40% {
+    --gradX: 100%;
+    --gradY: 100%;
+  }
+  60% {
+    --gradX: 50%;
+    --gradY: 100%;
+  }
+  80% {
+    --gradX: 0%;
+    --gradY: 50%;
+  }
+  100% {
+    --gradX: 50%;
+    --gradY: 0%;
+  }
+
+   
+  </style>
+</head>
+
+<body>
+  <div id="loader" class="center">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+  <div id="frame" class="container">
+    <div class="app">
+
+      <div class="head clearfix">
+        <span class="title"> BRUHCHAT</span>
+        <span onclick="gotocontact()" class="messages-notification">
+          <i class="fa fa-comments-o"></i>
+          {{!-- <span class="count">2</span> --}}
+
+        </span>
+      </div>
+
+      {{!-- <div class="search-bar">
+        <i class="fa fa-search"></i>
+        <input type="text" class="ip-search" placeholder="Search" />
+      </div> --}}
+
+      <div class="body">
+        <div class="friend-list clearfix">
+
+          <ul id="showcontact">
+
+
+            <li>
+              {{!-- <span class="messages">
+                <span class="count">1</span>
+              </span>
+              <img src="https://s5.postimg.cc/3wnxyjz8n/image.png" alt="" />
+              <span class="name">
+                Sophia
+                <span class="status">
+                  Active 2h ago
+                </span>
+              </span> --}}
+              <button onclick="right()" class=""
+                style="position:relative; margin-top:5%;height:40px;width: 40px;display:none;background:none;border-radius: 30%;box-shadow:2px 2px white;visibility:hidden"><i
+                  class="fa fa-arrow-left"></i></button>
+
+            </li>
+
+            <li style="visibility:hidden;display:none">
+              <span class="messages hide">
+                <span class="count"></span>
+              </span>
+              <img src="https://s5.postimg.cc/q9vold06b/image.png" alt="" />
+              <span class="name">
+                IRIS Chatbot
+                <span class="status">(beta)
+                </span>
+              </span>
+            </li>
+            <li style="margin-left: 5%;" class="active">
+              <img id="dp"  src="https://s5.postimg.cc/q9vold06b/image.png" alt="" />
+
+              <span style="float:left;margin-right:10%" class="name">
+                <p id="showtochatname">Emma</p>
+                <span class="status" id="showstatus">
+                  {{!-- Active 2 mins ago(beta) --}}
+                  {{!-- offline --}}
+                </span>
+                <span id="showtyping" class="status" >
+                   <div class="typingIndicatorContainer">
+    <div class="typingIndicatorBubble">
+      <div class="typingIndicatorBubbleDot"></div>
+      <div class="typingIndicatorBubbleDot"></div>
+      <div class="typingIndicatorBubbleDot"></div>
+    </div>
+  </div>
+ 
+                </span>
+              </span>
+            </li>
+            <li   class="" id="musicplayer" >
+              <input id="musicshow" type="text" disabled="true" >
+              <input   class="fa fa-upload musicupload" type="file" id="songfile"  accept="audio/mp3, audio/mp4,audio/mpeg"  id="myFile" name="filename">
+             
+               <audio controls class="musiccontrol"  id="audio_player" ></audio>
+              </li>
+
+
+
+
+
+            <li style="visibility:hidden;display:none">
+              {{!-- <span class="messages hide">
+                <span class="count"></span>
+              </span>
+              <img src="https://s5.postimg.cc/dz2q1ae5f/image.png" alt="" />
+              <span class="name">
+                Mark
+                <span class="status">
+                  Online
+                </span>
+              </span> --}}
+
+
+              <button onclick="right()" class=""
+                style="position:relative; margin-top:5%;height:40px;width: 40px;background:none;border-radius: 30%;box-shadow:2px 2px white"><i
+                  class="fa fa-arrow-right"></i></button>
+
+            </li>
+
+          </ul>
+
+        </div>
+
+        <div class="chat-messages">
+          <div class="chat">
+            <div class="chat-content clearfix">
+              <div id="showchat">
+                {{!--
+                <span class="friend last">
+                  <strong>Arka</strong>
+                  <hr class="edithr">
+                  Hi, How are You?
+                  <span class="time">
+                    7:30 PM
+                  </span>
+                </span>
+                <span class="you first">
+                  Hi, I am fine.
+                  How about you?
+                  <span class="time">
+                    7:31 PM
+                  </span>
+                </span>
+                <span class="friend last">
+                  <strong>Arka</strong>
+                  <hr class="edithr">
+                  Hi, How are You?
+                  <span class="time">
+                    7:30 PM
+                  </span>
+                </span>
+
+                <span class="you last">
+                  lets meet,
+                  this sunday!
+                  <span class="time">
+                    7:31 PM
+                  </span>
+                </span> --}}
+              </div>
+
+
+            </div>
+
+
+          </div>
+        <div>
+          <i class="fa fa-close" onclick="closeswipe()" id="closeswipe" ></i>
+    <input type="text" disabled="true" id="showswipe" placeholder="Lets's Say" />
+        </div>
+      
+        </div>
+        </div>
+      <!-- <input type="text" class="ip-msg" placeholder="type something.." /> -->
+
+
+
+      <div class="footer">
+
+        <ul>
+          <li class="active">
+            <i class="fa fa-comments-o"></i>
+          </li>
+          <li>
+            <i class="fa fa-lock"></i>
+          </li>
+          <li >
+            <i id="changeheart1" class="fa fa-lock "></i>
+            
+
+          </li>
+          <li onclick="deletefullchat()">
+            <i class="fa fa-trash"></i>
+          </li>
+          <li>
+            <i onclick="gotosettings()" class="fa fa-cog"></i>
+          </li>
+        </ul>
+      </div>
+
+
+    </div>
+    
+    <input type="text" id="chatinput" class="ip-msg" onkeypress="typing()" placeholder="Lets's Say" />
+    <button id="sendbutton" onclick="sendmessage()">
+      <i class="fa fa-send"></i>
+
+    </button>
+  </div>
+
+
+
+
+
+
+
+
+<audio id="send">
+  <source src="audio/send.mp3" type="audio/mpeg">
+</audio>
+<audio id="recieve">
+  <source src="audio/send.mp3" type="audio/mpeg">
+</audio>
+
+
+</body>
+
+</html>
+<script>
+var url="http://localhost:3000";
+  
+
+if(localStorage.getItem("toid")=="null"){
+    window.location.replace("contact");
+  
+}
+
+var socket=io('/user',{
+  auth:{
+    token:localStorage.getItem("userid"),
+    toid:localStorage.getItem(("toid"))
+  }
+});
+
+function loadscreen(){
+   document.getElementById("loader").style.display="none";
+  document.getElementById("frame").style.display="";
+}
+function offscreen(){
+    document.getElementById("loader").style.display="";
+  document.getElementById("frame").style.display="none";
+}
+
+
+window.addEventListener('online',  updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+
+function updateOnlineStatus(event) {
+  var isOnline = navigator.onLine
+if (isOnline) {
+    //alert("Awesome! You are online");
+    loadscreen();
+  socket.emit("setonlinebynet",{userid:localStorage.getItem("userid")});
+
+} else {
+    alert("Please check your Internet Connectivity");
+  socket.emit("setofflinebynet",{userid:localStorage.getItem("userid")});
+    offscreen();
+}
+
+}
+updateOnlineStatus();
+
+  document.getElementById("showtochatname").innerHTML = localStorage.getItem("tousername");
+   var allexistuser=JSON.parse(localStorage.getItem("allcontacts"));
+
+
+ var index = allexistuser.findIndex(item => item.userid == localStorage.getItem("toid"));
+ document.getElementById("dp").src="dp/dp"+allexistuser[index].dp+".png";
+
+   socket.on("dpchanged",function(data){
+          var allexistuser=JSON.parse(localStorage.getItem("allcontacts"));
+
+if((data.ownid)==localStorage.getItem("toid")){
+
+document.getElementById("dp").src="dp/dp"+data.dp+".png";
+}
+    var index = allexistuser.findIndex(item => item.userid ==data.ownid);
+allexistuser[index].dp=data.dp;
+localStorage.setItem("allcontacts",JSON.stringify(allexistuser));
+
+
+})
+
+
+  function right() {
+    //alert("hi");
+    //window.location.replace("login");
+  }
+  function sendmessage() {
+    var chat_deliver = document.getElementById("chatinput").value.trim();
+    // alert(chat_deliver);
+    if (chat_deliver.trim() != "") {
+      
+var unseen=getunseenno();
+
+
+
+
+      if(localStorage.getItem("soundvalue")==1){
+      document.getElementById("send").play(); 
+
+      }
+
+
+
+      var today = new Date();
+      var time = today.getHours() + ":" + today.getMinutes();
+      var ds = { time: time, toid: localStorage.getItem("toid"), chatbody: chat_deliver, ownid: localStorage.getItem("userid"), toname: localStorage.getItem("tousername"), ownname: localStorage.getItem("username"), swipe: swipevalue };
+      //console.log(ds);
+var data=ds;
+
+ 
+      
+      
+      swipevalue = "";
+    document.getElementById("showswipe").style.display="none";
+    document.getElementById("closeswipe").style.visibility="hidden";
+
+
+        socket.emit("newchat",ds);
+
+
+
+
+    }
+    document.getElementById("chatinput").value = "";
+  }
+
+
+  function gotocontact() {
+    setunseentozero();
+    localStorage.setItem("tousername", null);
+    localStorage.setItem("toid", null);
+
+    window.location.replace("contact");
+  }
+
+  function gotosettings() {
+    setunseentozero();
+    localStorage.setItem("tousername", null);
+    localStorage.setItem("toid", null);
+
+    window.location.replace("settings");
+  }
+
+
+    var unseenforthisuser = 0;
+    function setunseenforthisuser(a){
+      
+unseenforthisuser=a;
+return unseenforthisuser;
+    }
+var nowuser="null";
+     function setnowuser(a){
+nowuser=a;
+return nowuser;
+     }
+
+function getunseenno(){
+    var ds = { toid: localStorage.getItem("toid"), ownid: localStorage.getItem("userid") };
+var s;
+ fetch(url+"/getunseenno", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+    })
+
+      .then((res) => res.json())
+      .then((data) => {
+        if(data!=null){
+          console.log("unseen "+ data.nowuser);
+         unseenforthisuser=setunseenforthisuser(data.unseen);
+         setnowuser(data.nowuser);
+        
+        }
+
+      })
+      .catch((err) => console.log(err));
+
+      return unseenforthisuser;
+
+
+
+}
+showmessages();
+
+
+
+
+function linkify(text) {
+        if(text!=undefined){
+
+        
+        var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        return text.replace(exp, "<a href='$1' target='_blank'>$1</a>");
+        }
+        return text;
+}
+  function showmessages() {
+
+
+
+
+
+
+
+
+
+
+unseenforthisuser=getunseenno();
+
+
+   
+
+
+
+
+    var ds = { toid: localStorage.getItem("toid"), ownid: localStorage.getItem("userid") };
+
+
+
+
+    fetch(url+"/Showmessage", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+    })
+
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(unseenforthisuser);
+            showfinalmessages(data,unseenforthisuser);
+        })
+      .catch((err) => console.log(err));
+
+
+
+
+
+  }
+  showmessages();
+  var swipevalue = "";
+  function swipe(a) {
+    swipevalue = a;
+    
+
+    document.getElementById("showswipe").value=a;
+    document.getElementById("showswipe").style.display="block";
+    document.getElementById("closeswipe").style.visibility="visible";
+
+    console.log(swipevalue);
+  }
+  function closeswipe() {
+    swipevalue = "";
+    
+
+    document.getElementById("showswipe").value="";
+    document.getElementById("showswipe").style.display="none";
+    document.getElementById("closeswipe").style.visibility="hidden";
+
+  }
+  
+
+
+
+
+  var o = 0;
+  function addfav() {
+
+    var ds = { toid: localStorage.getItem("toid"), ownid: localStorage.getItem("userid"), set: o };
+
+    fetch(url+"/setfavorites", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+    })
+
+      .then((res) => res.json())
+      .then((data) => {
+
+      })
+      .catch((err) => console.log(err));
+
+
+
+    if (o == 0) {
+
+
+      document.getElementById("changeheart1").style.display = "none";
+      document.getElementById("changeheart2").style.display = "block";
+
+
+      o = 1;
+    }
+    else {
+      document.getElementById("changeheart1").style.display = "block";
+      document.getElementById("changeheart2").style.display = "none";
+      o = 0;
+
+    }
+  }
+
+
+
+  setunseentozero();
+  function setunseentozero() {
+    var ds = { toid: localStorage.getItem("toid"), ownid: localStorage.getItem("userid") };
+
+    fetch(url+"/Setunseentozero", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+    })
+
+      .then((res) => res.json())
+      .then((data) => {
+
+      })
+      .catch((err) => console.log(err));
+
+  }
+
+
+
+
+function setonlineseen(a){
+var ds = {  ownid: localStorage.getItem("userid"), value: a };
+      console.log("hi"+a);
+
+      fetch(url+"/setonline", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(ds),
+      })
+
+        .then((res) => res.json())
+        .then((data) => {
+
+        })
+        .catch((err) => console.log(err));
+
+
+
+
+}
+
+window.onblur = function() {
+  // This code will be executed when the window loses focus.
+   setonlineseen(0);
+};
+window.onfocus = function() {
+  // This code will be executed when the window loses focus.
+   setonlineseen(1);
+};
+
+ function getonlineoroffline() {
+    var ds = { toid: localStorage.getItem("toid"), ownid: localStorage.getItem("userid") };
+
+    fetch(url+"/gettoidonlinestatus", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+    })
+
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data online"+data.online);
+        if(data.online==1){
+          document.getElementById("showstatus").innerHTML="Online";
+        }
+        else{
+          document.getElementById("showstatus").innerHTML="Offline";
+
+        }
+
+      })
+      .catch((err) => console.log(err));
+
+  }
+getonlineoroffline();
+  function deletefullchat(){
+if(confirm("It will delete all the chats done with the user.Are you sure?")==true){
+
+     var ds = { toid: localStorage.getItem("toid"), ownid: localStorage.getItem("userid") };
+
+    fetch(url+"/deletefullchat", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+    })
+
+      .then((res) => res.json())
+      .then((data) => {
+      })
+      .catch((err) => console.log(err));
+
+          window.location.reload();
+  }
+  }
+console.log(
+  JSON.parse(localStorage.getItem("allcontacts"))
+
+);
+
+
+
+
+socket.on("onlineuser",function(data){
+console.log("hi" +data.userid);
+  if(localStorage.getItem("toid")==data.userid){
+    document.getElementById("showstatus").innerHTML="Online";
+  }
+})
+socket.on("offlineuser",function(data){
+
+  if(localStorage.getItem("toid")==data.userid){
+    document.getElementById("showstatus").innerHTML="Offline";
+  }
+})
+
+socket.on("showchat",function(data){
+    //showmessages();
+
+    //alert("mressage done");
+console.log(data);
+if(data.userid==localStorage.getItem("toid") && data.toid==localStorage.getItem("userid")){
+  console.log("hitted now")
+showfinalmessages(data.data,data.unseenforthisuser)
+  //if(data)
+}
+else{
+  Notification.requestPermission().then((perm) => {
+          if (perm === "granted") {
+            new Notification("New Message", {
+              body: data.lastmessage.ownname+`: `+data.lastmessage.chatbody,
+            });
+          }
+        });
+
+
+}
+
+    
+    
+  
+})
+
+
+function showfinalmessages(data,unseenforthisuser){
+    var allchats = "";
+
+   if (data != null) {
+
+
+          for (var i = 0; i < data.length; i++) {
+            var swipeable=data[i].chatbody;
+            data[i].chatbody=linkify(data[i].chatbody);
+            //  console.log(data[i].msgid[0]);
+            if (data[i].msgid[0] == 'r') {
+              if (data[i].tagged == "" || data[i].tagged == undefined) {
+
+
+                allchats = allchats + `<span style="margin-top:2%" class="friend last">
+                      `+ data[i].chatbody + `
+                        
+                        <span   class="time">
+                          `+ data[i].time + `
+                          <span onclick="swipe('`+ swipeable + `')" class="tickothers"> <i  style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i> </span>
+                          
+                        </span>
+                  </span>`;
+              }
+              else {
+                allchats = allchats + `<span style="margin-top:2%" class="friend last">
+                      <p id="swipe" >`+ data[i].tagged + `<p>
+                            <hr id="swipehr">
+                      `+ data[i].chatbody + `
+                        
+                        <span  class="time">
+                         
+                          `+ data[i].time + `
+                          <span onclick="swipe('`+ swipeable + `')" class="tickothers"> <i style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i> </span>
+
+                          
+                        </span>
+                  </span>`;
+
+
+              }
+            }
+            else {
+
+              if (data.length - i > unseenforthisuser) {
+                if (data[i].tagged == "" || data[i].tagged == undefined) {
+
+
+                  allchats = allchats + `<span style="margin-top:2%;"  class="you first">
+                       `+ data[i].chatbody + `
+                        <span  class="time">
+                          `+ data[i].time + `
+                          <span  class="seen"><i style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i>  </span>
+                          <span onclick="swipe('`+ swipeable + `')" class="tick">  </span>
+                        </span>
+                  </span>
+
+                  `;
+
+                }
+                else {
+
+                  allchats = allchats + `<span style="margin-top:2%;"  class="you first">
+                     <p id="swipe" >`+ data[i].tagged + `<p>
+                            <hr id="swipehr">
+  
+                       `+ data[i].chatbody + `
+                        <span  class="time">
+                          `+ data[i].time + `
+                          <span  class="seen"> <i style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i> </span>
+                          <span onclick="swipe('`+ swipeable + `')" class="tick"></span>
+                        </span>
+                  </span>
+
+                  `;
+
+
+                }
+              }
+              else {
+                if (data[i].tagged == "" || data[i].tagged == undefined) {
+
+                  allchats = allchats + `<span style="margin-top:2%;"  class="you first">
+                       `+ data[i].chatbody + `
+                        <span  class="time">
+                          `+ data[i].time + `
+                          <span class="redtogreen" ><i style="visibility:hidden"  class="fa fa-solid fa-share fa-flip-horizontal"></i>  </span>
+                          <span class="tick" onclick="swipe('`+ swipeable + `')">  </span>
+                        
+                        </span>
+                  </span>
+                  `;
+
+                }
+              
+              else {
+                allchats = allchats + `<span style="margin-top:2%;"  class="you first">
+                  <p id="swipe" >`+ data[i].tagged + `<p>
+                            <hr id="swipehr">
+                     
+                       `+ data[i].chatbody + `
+                        <span  class="time">
+                          `+ data[i].time + `
+                          <span class="redtogreen" ><i style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i>  </span>
+                          <span class="tick" onclick="swipe('`+ swipeable + `')">  </span>
+
+                        </span>
+                  </span>
+                  `;
+
+              }
+              }
+            }
+          }
+          allfinalmessages=allchats;
+          setallfinalmessages(allchats);
+          document.getElementById("showchat").innerHTML = allchats;
+        }
+        else {
+          document.getElementById("showchat").innerHTML = "<div style='height:20%;border:2px solid aqua;border-radius:20%;padding:5px;text-align:center;background:black;color:white;font-weight:bolder;font-size:smaller;'>NO CHATS HERE TO SHOW  .       LET'S TYPE YOUR FIRST MESSAGE NOW<div>";
+ ismessagenull=1;
+        }
+        var messageBody = document.querySelector('.chat');
+        if(localStorage.getItem("scrollvalue")==1){
+
+        messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        }
+        //var chatHistory = document.getElementById("messageBody");
+        //chatHistory.scrollTop = chatHistory.scrollHeight;
+     
+}
+var ismessagenull=0;
+ var messageBody = document.querySelector('.chat');
+        if(localStorage.getItem("scrollvalue")==1){
+
+        messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        }
+       
+
+var allfinalmessages="";
+function setallfinalmessages(data){
+  allfinalmessages=allfinalmessages;
+}
+
+
+
+
+
+socket.on("showchattome",function (all){
+console.log(all);
+var data=all.obj;
+var swipeable=data.chatbody;
+            data.chatbody=linkify(data.chatbody);
+
+   var allmessages ="";
+      //showmessages();
+      if (all.nowuser==localStorage.getItem("userid") && all.online==1) {
+                if (data.swipe == "" || data.swipe == undefined) {
+
+
+                  allmessages = allmessages + `<span style="margin-top:2%;"  class="you first">
+                       `+ data.chatbody + `
+                        <span  class="time">
+                          `+ data.time + `
+                          <span class="seen" ><i style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i>  </span>
+                          <span onclick="swipe('`+ swipeable + `')" class="tick" ></i>  </span>
+                        </span>
+                  </span>
+
+                  `;
+
+                }
+                else {
+
+                  allmessages = allmessages + `<span style="margin-top:2%;"  class="you first">
+                     <p id="swipe" >`+ data.swipe + `<p>
+                            <hr id="swipehr">
+  
+                       `+ data.chatbody + `
+                        <span  class="time">
+                          `+ data.time + `
+                          <span class="seen"><i style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i>   </span>
+                          <span onclick="swipe('`+ swipeable + `')" class="tick"></i>   </span>
+                        </span>
+                  </span>
+
+                  `;
+
+
+                }
+              }
+              else {
+                if (data.swipe == "" || data.swipe == undefined) {
+
+                  allmessages = allmessages + `<span style="margin-top:2%;"  class="you first">
+                       `+ data.chatbody + `
+                        <span  class="time">
+                          `+ data.time + `
+                          <span class="redtogreen"><i style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i>   </span>
+                          <span class="tick" onclick="swipe('`+ swipeable + `')" > </span>
+                        </span>
+                  </span>
+                  `;
+
+                }
+              
+              else {
+                allmessages = allmessages + `<span style="margin-top:2%;"  class="you first">
+                  <p id="swipe" >`+ data.swipe + `<p>
+                            <hr id="swipehr">
+                     
+                       `+ data.chatbody + `
+                        <span  class="time">
+                          `+ data.time + `
+                          <span class="redtogreen" ><i style="visibility:hidden" class="fa fa-solid fa-share fa-flip-horizontal"></i>   </span>
+                          <span class="tick" onclick="swipe('`+ swipeable + `')" > </span>
+
+                        </span>
+                  </span>
+                  `;
+
+              }
+              }
+              if(ismessagenull==1){
+  allfinalmessages="";
+  ismessagenull=0;
+}
+           allfinalmessages=allfinalmessages+allmessages;
+         // setallfinalmessages(allmessages);
+          document.getElementById("showchat").innerHTML = allfinalmessages;
+
+        var messageBody = document.querySelector('.chat');
+        if(localStorage.getItem("scrollvalue")==1){
+
+        messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+        }
+         
+
+})
+
+
+socket.on("iamenteredchat",function(data){
+  console.log("yo boy "+data.userid+" toid-"+data.toid);
+  if(data.userid=localStorage.getItem("toid")  && data.toid==localStorage.getItem("userid")){
+    var elements = document.getElementsByClassName('redtogreen'); // get all elements
+	for(var i = 0; i < elements.length; i++){
+		//elements[i].style.background = "greenyellow";
+		elements[i].className = "seen";
+	}
+  allfinalmessages=document.getElementById("showchat").innerHTML;
+  }
+  
+})
+function startplay(){
+
+}
+  var songs=document.getElementById("songfile")
+
+  songs.onchange = function() {
+    document.getElementById("musicplayer").classname="musicplayernew";
+    document.getElementById("musicplayer").setAttribute('id',"musicplayernew");
+    document.getElementById("musicplayernew").style.backgroundImage=`url(demopage/appback2.png)`;
+
+   var files = this.files;
+    var file = URL.createObjectURL(files[0]);
+    audio_player.src = file; 
+    audio_player.play();
+    document.getElementById("musicshow").value=file; 
+
+};
+function typing(){
+  console.log("typing startred");
+
+  socket.emit("typingstart",{ownid:localStorage.getItem("userid"),toid:localStorage.getItem("toid")});
+  setTimeout(endtyping,1000);
+}
+function endtyping(){
+  console.log("typing ended");
+
+  socket.emit("typingend",{ownid:localStorage.getItem("userid"),toid:localStorage.getItem("toid")});
+
+}
+
+
+socket.on("showtypingstart",function(data){
+
+  if(data.ownid==localStorage.getItem("toid") && data.toid==localStorage.getItem("userid")){
+   document.getElementById("showtyping").style.visibility="visible"; 
+
+  }
+
+
+})
+
+socket.on("showtypingend",function(data){
+
+  if(data.ownid==localStorage.getItem("toid") && data.toid==localStorage.getItem("userid")){
+    document.getElementById("showtyping").style.visibility="hidden";
+
+  }
+
+})
+</script>
+{{!-- 
+
+console.log("hi kire"+nowuser);
+      
+      
+{{!-- 
+
+
+     fetch(url+"/Sendmessage", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(ds),
+      })
+
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("data");
+
+
+        })
+        .catch((err) => console.log(err)); --}}
+{{!-- if (data.length - i > unseenforthisuser) {
+                if (data.swipe == "" || data.swipe == undefined) {
+
+
+                  allmessages = allmessages + `<span style="margin-top:2%;"  class="you first">
+                       `+ data.chatbody + `
+                        <span style="color:white" class="time">
+                          `+ data.time + `
+                          <span class="seen">file  </span>
+                          <span onclick="swipe('`+ data.chatbody + `')" class="tick">file  </span>
+                        </span>
+                  </span>
+
+                  `;
+
+                }
+                else {
+
+                  allmessages = allmessages + `<span style="margin-top:2%;"  class="you first">
+                     <p id="swipe" >`+ data.swipe + `<p>
+                            <hr id="swipehr">
+  
+                       `+ data.chatbody + `
+                        <span style="color:white" class="time">
+                          `+ data.time + `
+                          <span class="seen">file  </span>
+                          <span onclick="swipe('`+ data.chatbody + `')" class="tick">file  </span>
+                        </span>
+                  </span>
+
+                  `;
+
+
+                }
+              }
+              else {
+                if (data.swipe == "" || data.swipe == undefined) {
+
+                  allmessages = allmessages + `<span style="margin-top:2%;"  class="you first">
+                       `+ data.chatbody + `
+                        <span style="color:white" class="time">
+                          `+ data.time + `
+                          <span  style="width:15px;height:2px;border-radius:50%;background:red;">file  </span>
+                          <span onclick="swipe('`+ data.chatbody + `')" class="tick">file  </span>
+                        </span>
+                  </span>
+                  `;
+
+                }
+              
+              else {
+                allmessages = allmessages + `<span style="margin-top:2%;"  class="you first">
+                  <p id="swipe" >`+ data.swipe + `<p>
+                            <hr id="swipehr">
+                     
+                       `+ data.chatbody + `
+                        <span style="color:white" class="time">
+                          `+ data.time + `
+                          <span  style="width:15px;height:2px;border-radius:50%;background:red;">  </span>
+                          <span onclick="swipe('`+ data.chatbody + `')" class="tick">file  </span>
+
+                        </span>
+                  </span>
+                  `;
+
+              }
+              }
+            --}}
+
+{{!--
+
+function showcontact(){
+var allcontacts=JSON.parse( localStorage.getItem("allcontacts"));
+console.log(allcontacts);
+var data=`
+<li>
+  <button onclick="right()" class=""
+    style="position:relative; margin-top:5%;height:40px;width: 40px;background:none;border-radius: 30%;box-shadow:2px 2px white"><i
+      class="fa fa-arrow-left"></i></button>
+
+</li>`;
+for (var i=0;i<allcontacts.length;i++){ console.log(allcontacts[i].toname); if(i!=1 ){
+  if(allcontacts[i].toid==localStorage.getItem("toid")){ } data=data+` <li>
+  <span class="messages hide">
+    <span class="count"></span>
+  </span>
+  <img src="https://s5.postimg.cc/q9vold06b/image.png" alt="" />
+  <span class="name">
+    `+allcontacts[i].toname+`
+    <span class="status">
+      Online
+    </span>
+  </span>
+  </li>
+  `;
+  }
+  else if(i==1){
+  data=data+`<li class="active">
+    <span class="messages hide">
+      <span class="count"></span>
+    </span>
+    <!-- <img src="https://s5.postimg.cc/nttv7ii3n/image.png" alt="" /> -->
+    <img src="https://s5.postimg.cc/q9vold06b/image.png" alt="" />
+
+    <span class="name">
+      <p id="showtochatname">`+localStorage.getItem("tousername")+`</p>
+      <span class="status">
+        Active 2 mins ago(beta)
+      </span>
+    </span>
+  </li>
+  `;
+  }
+  }
+
+  document.getElementById("showontact").innerHTML=data+` <li>
+
+
+
+    <button onclick="right()" class=""
+      style="position:relative; margin-top:5%;height:40px;width: 40px;background:none;border-radius: 30%;box-shadow:2px 2px white"><i
+        class="fa fa-arrow-right"></i></button>
+
+  </li>
+
+  `;
+  }
+  showcontact();
+
+  --}}
+  {{!--  setTimeout(()=>{ 
+  socket.emit("setonlinebynet",{userid:localStorage.getItem("userid")});
+             }, 500);
+   --}}

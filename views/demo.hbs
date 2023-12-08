@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="./PureSnow.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        body{
+            background: black;
+            margin: auto;
+            margin-top:5% ;
+            max-width: 350px;
+              }
+        #navbar{
+            /* background-color: rgb(255, 0, 0); */
+            height: 8vh;
+            width: 98%;
+       
+        }
+        .left{
+            /* background-color: aqua; */
+
+        }
+        .right{
+            /* background-color: rgb(229, 229, 229); */
+            height: 80vh;
+
+        }
+        #showmap{
+            /* background-color: greenyellow; */
+            height: 75%;
+            /* background: url("chatpage/chatappbackground2.png"); */
+
+        }
+        #chatbot{position: absolute;
+            /* background-color: rgb(21, 0, 255); */
+            height: 100px;
+            width: 100px;
+            margin-top: 50px;margin-left: 40px;
+            border-radius:100% ;
+
+        }
+        #showimg{
+            /* animation: fadeIn 0.1s; */
+            border-radius: 2%;
+            margin-top: 5%;
+            
+ 
+        }
+        #snow{
+
+        }
+        #mainbody{
+            display: grid;
+            grid-template-columns: 60% 38%;
+            grid-gap: 5px;
+            height: 90vh;
+            /* border: 5px solid green; */
+            background-image: url("demopage/appback6.png");
+            background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 98% 100%;
+  
+      
+        }
+        .imgnow{
+            width: 90%;
+            margin-left:5%;
+            margin-top:15%;
+            margin-bottom:0%;
+            height: 60vh;
+            border: 0.35rem solid;
+  
+            border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+  animation: borderRotate var(--d) linear infinite forwards;
+        }
+        .mapnow{
+            width: 90%;
+            margin-left:5%;
+            margin-top:-20%;
+            margin-bottom:25%;
+            height: 60vh;
+            
+        }
+        #showmapnow{
+            /* border: 5px solid red; */
+            border-radius: 2%;
+            margin-top: 10%;
+            width: 90%;
+            margin-top:30%;
+            display: grid;
+            grid-template-columns: auto auto auto ;
+            grid-gap: 10px;
+            margin-bottom:15%;
+            height: 60vh;
+            /* background-image: url("demopage/showmapbackground1.png"); */
+            background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 98% 100%;
+  color: aliceblue;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  overflow: scroll;
+  
+  border: 0.35rem solid;
+  
+  border-image: radial-gradient(ellipse at var(--gradX) var(--gradY), var(--c1), var(--c1) 10%, var(--c2) 40%) 30;
+  animation: borderRadial var(--d) linear infinite forwards;
+
+        }
+        #showmapnow::-webkit-scrollbar{
+    display: none;
+  }
+  
+  #showchat{
+            position: relative;
+            height: 90px;
+            width: 200px;
+            margin-left: 33%;
+            color: aliceblue;
+            text-align: center;
+            margin-top: 10px;
+            border-radius: 100% 100% 30% 100%;
+            padding: 21px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-size: 12px;
+            background-image: url(demopage/chatbubble2.png);
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 98% 100%;
+            -webkit-animation-duration: 5s;
+                        animation-duration: 5s;
+                        -webkit-animation-fill-mode: both;
+                        animation-fill-mode: both;
+                    
+
+  
+            animation-name: fadeInLeft;
+    
+        }#showchat1{
+            position: relative;
+            height: 90px;
+            width: 200px;
+            margin-left: 33%;
+            color: aliceblue;
+            text-align: center;
+            margin-top: 10px;
+            border-radius: 100% 100% 30% 100%;
+            padding: 21px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-size: 12px;
+            background-image: url(demopage/chatbubble2.png);
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 98% 100%;
+            -webkit-animation-duration: 5s;
+                        animation-duration: 5s;
+                        -webkit-animation-fill-mode: both;
+                        animation-fill-mode: both;
+                    
+
+  
+            animation-name: fadeInLeft;
+    
+        }
+        
+        .showchatnew{
+            position: relative;
+            height: 90px;
+            width: 200px;
+            margin-left: 33%;
+            color: aliceblue;
+            text-align: center;
+            margin-top: 10px;
+            border-radius: 100% 100% 30% 100%;
+            padding: 21px;
+            padding-right: 20px;
+            padding-left: 20px;
+            font-size: 12px;
+            background-image: url(demopage/chatbubble2.png);
+            background-repeat: no-repeat;
+            object-fit: contain;
+            background-size: 98% 100%;
+            -webkit-animation-duration: 1.5s;
+                        animation-duration: 1.5s;
+                        -webkit-animation-fill-mode: both;
+                        animation-fill-mode: both;
+                    
+
+  
+            animation-name: fadeInLeft;
+    
+          }
+       
+        @keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+         
+         @keyframes fadeInLeft {
+            0% {
+               opacity: 0;
+               transform: translateX(-70px);
+            }
+            100% {
+               opacity: 1;
+               transform: translateX(0);
+            }
+         }
+         
+         .fadeInLeft {
+         -webkit-animation-name: fadeInLeft;
+         animation-name: fadeInLeft;
+        } 
+
+       
+
+         
+         @keyframes fadeInTop {
+            0% {
+               opacity: 0;
+               transform: translateY(-50px);
+            }
+            100% {
+               opacity: 1;
+               transform: translateY(0);
+            }
+         }
+         
+         .fadeInTop {
+         -webkit-animation-name: fadeInTop;
+         animation-name: fadeInTop;
+        } 
+     
+        @keyframes fadeInHrleft {
+            0% {
+               opacity: 0;
+               transform: translateX(30px);
+            }
+            100% {
+               opacity: 1;
+               transform: translateX(0);
+            }
+         }
+         
+         .fadeInTop {
+         -webkit-animation-name: fadeInHrleft;
+         animation-name: fadeInHrleft;
+        } 
+     
+
+#model{
+    width: 80%;
+    height: 80%;
+    border-radius: 100%;
+}
+.divleft{
+border-radius: 100%;
+padding: -10px;
+width:25px;height: 25px;
+}
+.divmid{
+
+    height: auto;
+width: auto;
+border-radius: 100%;
+padding: 10px;
+width:25px;height: 25px;
+
+}
+.divright{
+
+    height: auto;
+width: auto;
+border-radius: 100%;
+padding: 10px;
+width:25px;height: 25px;
+
+}
+.hrleft{
+    width:90%;
+    background-color: aliceblue;
+    margin: 0%;
+    margin-left:45% ;
+    margin-top: -80%;
+}.hrmid{
+    width: auto;
+    background-color: aliceblue;
+    transform: rotate(90deg);
+    margin: 0%;
+    margin-left:0% ;
+}.hrright{
+    width: 100%;
+    background-color: aliceblue;
+    margin: 0%;
+    margin-left:-50% ;
+    margin-top: -80%;
+}
+.hrleftnew{
+    width:90%;
+    background-color: aqua;
+    margin: 0%;
+    margin-left:45% ;
+    margin-top: -80%;
+    -webkit-animation-duration: 3s;
+                        animation-duration: 3s;
+                        -webkit-animation-fill-mode: both;
+                        animation-fill-mode: both;
+                    
+
+  
+            animation-name: fadeInHrleft;
+    
+}
+.hrrightnew{
+    width: 100%;
+    background-color: aqua;
+    margin: 0%;
+    margin-left:-50% ;
+    margin-top: -80%;
+}
+#nav{
+        background-image: url("demopage/navback.png");
+            background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 98% 100%;
+  
+    }
+.iconimageleft{
+    width: 10px;
+    height: 10px;
+    margin-left:1px;
+    border-radius: 100%;
+
+}
+.iconimagemid{
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    border-radius: 100%;
+
+}
+.iconimageright{
+    width: 10px;
+    height: 10px;
+    margin-left: 2px;
+    margin-top: -18px;
+    border-radius: 100%;
+
+}
+.divmid1{
+    background-image: url(demopage/midshow1.png);
+            background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 101% 100%;
+
+}
+.divmidlast{
+    background-image: url(demopage/lastshow1.png);
+            background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 100% 100%;
+  border-radius: 100%;
+
+}.divmidlastnotactive{
+    background-image: url(demopage/lastshow2.png);
+            background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 100% 100%;
+
+}.divmidothers{
+    background-image: url(demopage/startshow.png);
+            background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 102% 105%;
+  -webkit-animation-duration: 10s;
+                        animation-duration: 2s;
+                        -webkit-animation-fill-mode: both;
+                        animation-fill-mode: both;
+                    
+
+  
+            animation-name: fadeInTop;
+    
+
+}.divmidothersnotactive{
+    background-image: url(demopage/startshow1.png);
+            background-repeat: no-repeat;
+  object-fit: contain;
+  background-size: 102% 105%;
+
+}
+.snowflake {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(white, white); /* Workaround for Chromium's selective color inversion */
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px white);
+}
+
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 90deg;
+  inherits: true;
+}
+
+@property --gradX {
+  syntax: '<percentage>';
+  initial-value: 50%;
+  inherits: true;
+}
+
+@property --gradY {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: true;
+}
+
+
+:root {
+  --d: 2500ms;
+  --angle: 90deg;
+  --gradX: 100%;
+  --gradY: 50%;
+  --c1: rgba(168, 239, 255, 1);
+  --c2: rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+@keyframes borderRotate {
+  100% {
+    --angle: 420deg;
+  }
+}
+
+@keyframes borderRadial {
+  20% {
+    --gradX: 100%;
+    --gradY: 50%;
+  }
+  40% {
+    --gradX: 100%;
+    --gradY: 100%;
+  }
+  60% {
+    --gradX: 50%;
+    --gradY: 100%;
+  }
+  80% {
+    --gradX: 0%;
+    --gradY: 50%;
+  }
+  100% {
+    --gradX: 50%;
+    --gradY: 0%;
+  }
+}
+        
+    </style>
+</head>
+<body>
+
+    <div id="snow"></div>
+
+    <div id="navbar">
+        <nav  id="nav"class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand text-light" href="#">Chatapp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse  " id="navbarText">
+                
+                <ul class="navbar-nav mr-auto">
+                    <li  class="nav-item active">
+                        <a class="nav-link" href="contact" >Skip Demonstration <span class="sr-only">(current)</span></a>
+                    </li>
+                    
+                </ul>
+    
+</div>
+</nav>
+</div>
+<div id="mainbody">
+<div class="left" id="showimages" >
+    
+    <div  id="showimg">
+        <img class="imgnow" src="chatpage/chatappbackground2.png" alt="" >
+    </div>
+    <div class="showchatold" id="showchat1">
+        <!-- Hey This Is Our Chatapp -->
+        malo is a vey good boy .genarally he is failed in different type of exams. 
+    </div>
+</div>
+<div class="right">
+            <div id="showmap" >
+                <div id="showmapnow">
+                        <!-- <div class="divleft"></div>
+                        <div class="divmid"></div>
+                        <div class="divright"></div>
+                      
+                      
+                  <hr  class="hrleft">
+                  <hr class="hrmid">
+                  <hr class="hrright">
+          
+
+                        <div class="divleft"></div>
+                        <div class="divmid"></div>
+                        <div class="divright"></div>
+              <hr  class="hrleft">
+              <hr class="hrmid">
+              <hr class="hrright">
+
+                        <div class="divleft"></div>
+                        <div class="divmid"></div>
+                        <div class="divright"></div>
+                        <hr  class="hrleft">
+                        <hr class="hrmid">
+                        <hr class="hrright">
+                
+      
+                              <div class="divleft"></div>
+                              <div class="divmid"></div>
+                              <div class="divright"></div>
+                    <hr  class="hrleft">
+                    <hr class="hrmid">
+                    <hr class="hrright">
+      
+                              <div class="divleft"></div>
+                              <div class="divmid"></div>
+                              <div class="divright"></div>
+                              <hr  class="hrleft">
+                              <hr class="hrmid">
+                              <hr class="hrright">
+                      
+            
+                                    <div class="divleft"></div>
+                                    <div class="divmid"></div>
+                                    <div class="divright"></div>
+                                
+                                    <hr  class="hrleft">
+                                    <hr class="hrmid">
+                                    <hr class="hrright">
+                      
+                                              <div class="divleft"></div>
+                                              <div class="divmid"></div>
+                                              <div class="divright"></div>
+                                               -->
+
+                        
+                </div>
+
+            </div>
+            <div id="chatbot">
+<video  src="demopage/chatbotvideomodel6.mp4" id="model"></video>
+            </div>
+
+</div>
+
+
+
+    </div>
+</body>
+<button onclick="change()">change</button>
+<button id="speak" onclick="speakvoice()">speak</button>
+<!-- <button onclick="toggle_snow()"> ToggleSnow </button> -->
+<input type="checkbox" id="toggle_snow" checked="true" onclick="toggle_snow()"> ToggleSnow </input>
+
+
+</html>
+
+<script>
+    // document.getElementById("model").play();
+//minimum no will be 7
+var now=1;
+var showno=17;
+function showall(){
+    var all="";
+    var t=0;
+for(var i=1;i<=showno;i++){
+    var p=t+1;
+    var q=t+2;
+    var r=t+3;
+    if( i==showno){
+all=all+`<div id="div`+p+`" style="visibility:hidden" class="divleft"></div>
+                        <div  id="div`+q+`"  class="divmid divmidlastnotactive"></div>
+                        <div  id="div`+r+`"  style="visibility:hidden" class="divright"></div>
+                      
+                      
+                 `;
+                 t=r;
+    }
+    else if(i==1){
+all=all+`<div id="div`+p+`"  style="visibility:hidden" class="divleft"></div>
+                        <div id="div`+q+`"  class="divmid divmid1" ></div>
+                        <div id="div`+r+`"  style="visibility:hidden" class="divright"></div>
+                      
+                      
+                  <hr id="hr`+p+`" style="visibility:hidden"  class="hrleft">
+                  <hr id="hr`+q+`" class="hrmid">
+                  <hr id="hr`+p+`" style="visibility:hidden" class="hrright">
+          `;
+          t=r;
+
+    }
+    else if(i%2==0){
+        all=all+`<div id="div`+p+`"   class="divleft"><img id="icon`+p+`"  class="iconimageleft" src="demopage/showleftrightdivimage.png"></div>
+                        <div id="div`+q+`"  class="divmid divmidothersnotactive"></div>
+                        <div  id="div`+r+`" style="visibility:hidden" class="divright"></div>
+                      
+                      
+                  <hr id="hr`+p+`"   class="hrleft">
+                  <hr id="hr`+q+`"  class="hrmid">
+                  <hr id="hr`+r+`" style="visibility:hidden" class="hrright">
+          `;
+          t=r;
+
+
+    }
+    else if(i%2==1){
+        all=all+`<div id="div`+p+`"  style="visibility:hidden" class="divleft"></div>
+                        <div  id="div`+q+`" class="divmid divmidothersnotactive"></div>
+                        <div  id="div`+r+`"  class="divright"><img id="icon`+p+`" class="iconimageright" src="demopage/showleftrightdivimage.png"></div>
+                      
+                      
+                  <hr id="hr`+r+`" style="visibility:hidden"  class="hrleft">
+                  <hr id="hr`+q+`"  class="hrmid">
+                  <hr id="hr`+p+`"  class="hrright">
+          `;
+                 t=r;
+
+    }
+}
+document.getElementById("showmapnow").innerHTML=all;
+now=1;
+}
+showall();
+
+function change(){
+    now++;
+    speakvoice("hi");
+    var g=now-1;
+    var a=now*3-1;
+    document.getElementById("showchat"+g).setAttribute('id',"showchat"+now);
+    document.getElementById("showchat"+now).style.visibility="hidden";
+    
+    setTimeout(()=>{ // speak after 2 seconds 
+    document.getElementById("showchat"+now).style.visibility="visible";
+           
+           document.getElementById("showchat"+now).className="showchatnew";
+   
+             }, 500);
+          
+   
+             setTimeout(()=>{ // speak after 2 seconds 
+           
+           document.getElementById("showchat"+now).className="";
+   
+             }, 100);
+          
+   
+          
+
+    // var prev=document.getElementsByClassName("showchat"+now);
+    // prev[0].className="showchat";
+    
+
+
+    // document.getElementById("showchat").className=("showchat showchatnew");
+    // document.getElementById("showchat").classList.add("showchatnew");
+    // $("#showchat").load(location.href,"");
+    console.log(a);
+    if(now<showno){
+        
+
+         document.getElementById("div"+a).className="divmid divmidothers";
+        var u=now*3-2;
+        setTimeout(()=>{ // speak after 2 seconds 
+            document.getElementById("icon"+u).src="demopage/showleftrightdivimage2.png";
+        var e=u-2;
+        document.getElementById("hr"+e).style.backgroundColor="aqua";
+        document.getElementById("hr"+u).style.backgroundColor="aqua";
+
+          }, 1800);
+       
+        
+
+
+        if(now>5){
+            var n=a-12;
+            document.getElementById("div"+n).scrollIntoView({ behavior: "smooth", inline: "nearest" });
+        }
+    }
+    else if(now==showno){
+        var u=now*3-4;
+        
+        document.getElementById("div"+a).className="divmidlast"
+        document.getElementById("hr"+u).style.backgroundColor="aqua";
+       
+
+    }
+}
+
+
+
+
+let voices = speechSynthesis.getVoices();
+           function getVoices() {
+         if(!voices.length){
+         // some time the voice will not be initialized so we can call speak with empty string
+         // this will initialize the voices 
+         let utterance = new SpeechSynthesisUtterance("");
+         speechSynthesis.speak(utterance);
+         voices = speechSynthesis.getVoices();
+         }
+         return voices;
+         }
+         
+         
+         function speak(text, voice, rate, pitch, volume) {
+         // create a SpeechSynthesisUtterance to configure the how text to be spoken 
+         let speakData = new SpeechSynthesisUtterance();
+         speakData.volume = volume; // From 0 to 1
+         speakData.rate = rate; // From 0.1 to 10
+         speakData.pitch = pitch; // From 0 to 2
+         speakData.text = text;
+         speakData.lang = 'en';
+         speakData.voice = voice;
+         
+         // pass the SpeechSynthesisUtterance to speechSynthesis.speak to start speaking 
+         speechSynthesis.speak(speakData);
+    // document.getElementById("model").pause();
+
+         
+         }
+         
+         
+        function speakvoice(t){
+
+            let voices = getVoices();
+         let rate = 0.9, pitch =1.1, volume = 1;
+        //  let text = "hi sandy i am your sayantan. please ignore sayandip for the sake of our relationship";
+        let text = "malo is a vey good boy .genarally he is failed in different type of exams. ";
+
+         console.log(voices.length);
+         //10
+        speak(text, voices[5], rate, pitch, volume);
+         
+        setTimeout(()=>{ // speak after 2 seconds 
+        //  rate = 0.5; pitch = 1.5, volume = 0.5;
+        //  text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
+        //  speak(text, voices[10], rate, pitch, volume );
+    document.getElementById("model").play();
+
+         }, 1000);
+         setTimeout(()=>{ // speak after 2 seconds 
+        //  rate = 0.5; pitch = 1.5, volume = 0.5;
+        //  text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
+        //  speak(text, voices[10], rate, pitch, volume );
+    document.getElementById("model").pause();
+    document.getElementById("model").currentTime = 0;
+         }, 7000);
+        
+        }
+
+
+
+
+
+        //  document.getElementById('speak').addEventListener('click', () => {
+        //    function getVoices() {
+        //  let voices = speechSynthesis.getVoices();
+        //  if(!voices.length){
+        //  // some time the voice will not be initialized so we can call speak with empty string
+        //  // this will initialize the voices 
+        //  let utterance = new SpeechSynthesisUtterance("");
+        //  speechSynthesis.speak(utterance);
+        //  voices = speechSynthesis.getVoices();
+        //  }
+        //  return voices;
+        //  }
+         
+         
+        //  function speak(text, voice, rate, pitch, volume) {
+        //  // create a SpeechSynthesisUtterance to configure the how text to be spoken 
+        //  let speakData = new SpeechSynthesisUtterance();
+        //  speakData.volume = volume; // From 0 to 1
+        //  speakData.rate = rate; // From 0.1 to 10
+        //  speakData.pitch = pitch; // From 0 to 2
+        //  speakData.text = text;
+        //  speakData.lang = 'en';
+        //  speakData.voice = voice;
+         
+        //  // pass the SpeechSynthesisUtterance to speechSynthesis.speak to start speaking 
+        //  speechSynthesis.speak(speakData);
+         
+        //  }
+         
+        // //  if ('speechSynthesis' in window) {
+         
+        //  let voices = getVoices();
+        //  let rate = 1, pitch = 2, volume = 1;
+        //  let text = "Spaecking with volume = 1 rate =1 pitch =2 ";
+         
+        //  speak(text, voices[5], rate, pitch, volume);
+         
+        //  setTimeout(()=>{ // speak after 2 seconds 
+        //  rate = 0.5; pitch = 1.5, volume = 0.5;
+        //  text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
+        //  speak(text, voices[10], rate, pitch, volume );
+        //  }, 2000);
+        //  }else{
+        // //  console.log(' Speech Synthesis Not Supported 😞'); 
+        // //  }
+        //  });
+
+let snowflakes_count = 200;
+
+// let base_css = ``; // Put your custom base css here
+
+if (typeof total !== 'undefined'){
+    snowflakes_count = total;
+}
+
+
+// This function allows you to turn on and off the snow
+function toggle_snow() {
+    let check_box = document.getElementById("toggle_snow");
+    if (check_box.checked == true) {
+        document.getElementById('snow').style.display = "block";
+    }
+    else {
+        document.getElementById('snow').style.display = "none";
+    }
+}
+
+// Creating snowflakes
+function spawn_snow(snow_density = 200) {
+    snow_density -= 1;
+
+    for (let x = 0; x < snow_density; x++) {
+        let board = document.createElement('div');
+        board.className = "snowflake";
+
+        document.getElementById('snow').appendChild(board);
+    }
+}
+
+// Append style for each snowflake to the head
+function add_css(rule) {
+    let css = document.createElement('style');
+    css.type = 'text/css';
+    css.appendChild(document.createTextNode(rule)); // Support for the rest
+    document.getElementsByTagName("head")[0].appendChild(css);
+}
+
+
+
+// Math
+function random_int(value = 100){
+    return Math.floor(Math.random() * value) + 1;
+}
+
+function random_range(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
+// Create style for snowflake
+function spawnSnowCSS(snow_density = 200){
+    let snowflake_name = "snowflake";
+    let rule = ``;
+    if (typeof base_css !== 'undefined'){
+        rule = base_css;
+    }
+    
+    for(let i = 1; i < snow_density; i++){
+        let random_x = Math.random() * 100; // vw
+        let random_offset = random_range(-100000, 100000) * 0.0001; // vw;
+        let random_x_end = random_x + random_offset;
+        let random_x_end_yoyo = random_x + (random_offset / 2);
+        let random_yoyo_time = random_range(30000, 80000) / 100000;
+        let random_yoyo_y = random_yoyo_time * 100; // vh
+        let random_scale = Math.random();
+        let fall_duration = random_range(10, 30) * 1; // s
+        let fall_delay = random_int(30) * -1; // s
+        let opacity_ = Math.random();
+
+        rule += `
+        .${snowflake_name}:nth-child(${i}) {
+            opacity: ${opacity_};
+            transform: translate(${random_x}vw, -10px) scale(${random_scale});
+            animation: fall-${i} ${fall_duration}s ${fall_delay}s linear infinite;
+        }
+
+        @keyframes fall-${i} {
+            ${random_yoyo_time*100}% {
+                transform: translate(${random_x_end}vw, ${random_yoyo_y}vh) scale(${random_scale});
+            }
+
+            to {
+                transform: translate(${random_x_end_yoyo}vw, 100vh) scale(${random_scale});
+            }
+            
+        }
+        `
+    }
+
+    add_css(rule);
+}
+
+// Load the rules and execute after the DOM loads
+window.onload = function() {
+    spawnSnowCSS(snowflakes_count);
+    spawn_snow(snowflakes_count);
+};
+
+// TODO add progress bar for slower clients
+
+   </script>
+
+   <!-- <script>
+    // document.getElementById("model").play();
+//minimum no will be 7
+var now=1;
+var showno=7;
+function showall(){
+    var all="";
+    var t=0;
+for(var i=1;i<=showno;i++){
+    var p=t+1;
+    var q=t+2;
+    var r=t+3;
+    if( i==showno){
+all=all+`<div id="div`+p+`" style="visibility:hidden" class="divleft"></div>
+                        <div  id="div`+q+`"  class="divmid divmidlastnotactive"></div>
+                        <div  id="div`+r+`"  style="visibility:hidden" class="divright"></div>
+                      
+                      
+                 `;
+                 t=r;
+    }
+    else if(i==1){
+all=all+`<div id="div`+p+`"  style="visibility:hidden" class="divleft"></div>
+                        <div id="div`+q+`"  class="divmid divmid1" ></div>
+                        <div id="div`+r+`"  style="visibility:hidden" class="divright"></div>
+                      
+                      
+                  <hr id="hr`+p+`" style="visibility:hidden"  class="hrleft">
+                  <hr id="hr`+q+`" class="hrmid">
+                  <hr id="hr`+p+`" style="visibility:hidden" class="hrright">
+          `;
+          t=r;
+
+    }
+    else if(i%2==0){
+        all=all+`<div id="div`+p+`"   class="divleft"><img id="icon`+p+`"  class="iconimageleft" src="demopage/showleftrightdivimage.png"></div>
+                        <div id="div`+q+`"  class="divmid divmidothersnotactive"></div>
+                        <div  id="div`+r+`" style="visibility:hidden" class="divright"></div>
+                      
+                      
+                  <hr id="hr`+p+`"   class="hrleft">
+                  <hr id="hr`+q+`"  class="hrmid">
+                  <hr id="hr`+r+`" style="visibility:hidden" class="hrright">
+          `;
+          t=r;
+
+
+    }
+    else if(i%2==1){
+        all=all+`<div id="div`+p+`"  style="visibility:hidden" class="divleft"></div>
+                        <div  id="div`+q+`" class="divmid divmidothersnotactive"></div>
+                        <div  id="div`+r+`"  class="divright"><img id="icon`+p+`" class="iconimageright" src="demopage/showleftrightdivimage.png"></div>
+                      
+                      
+                  <hr id="hr`+r+`" style="visibility:hidden"  class="hrleft">
+                  <hr id="hr`+q+`"  class="hrmid">
+                  <hr id="hr`+p+`"  class="hrright">
+          `;
+                 t=r;
+
+    }
+}
+document.getElementById("showmapnow").innerHTML=all;
+now=1;
+}
+showall();
+
+function change(){
+    now++;
+    var a=now*3-1;
+    console.log(a);
+    if(now<showno){
+
+        document.getElementById("div"+a).className="divmid divmidothers"
+        var u=now*3-2;
+        document.getElementById("icon"+u).src="demopage/showleftrightdivimage2.png";
+        var e=u-2;
+        document.getElementById("hr"+u).style.backgroundColor="aqua";
+        document.getElementById("hr"+e).style.backgroundColor="aqua";
+        if(now>5){
+            var n=a-12;
+            document.getElementById("div"+n).scrollIntoView({ behavior: "smooth", inline: "nearest" });
+        }
+    }
+    else if(now==showno){
+        var u=now*3-4;
+        
+        document.getElementById("div"+a).className="divmidlast"
+        document.getElementById("hr"+u).style.backgroundColor="aqua";
+       
+
+    }
+}
+
+
+
+
+let voices = speechSynthesis.getVoices();
+           function getVoices() {
+         if(!voices.length){
+         // some time the voice will not be initialized so we can call speak with empty string
+         // this will initialize the voices 
+         let utterance = new SpeechSynthesisUtterance("");
+         speechSynthesis.speak(utterance);
+         voices = speechSynthesis.getVoices();
+         }
+         return voices;
+         }
+         
+         
+         function speak(text, voice, rate, pitch, volume,time) {
+         // create a SpeechSynthesisUtterance to configure the how text to be spoken 
+         let speakData = new SpeechSynthesisUtterance();
+         speakData.volume = volume; // From 0 to 1
+         speakData.rate = rate; // From 0.1 to 10
+         speakData.pitch = pitch; // From 0 to 2
+         speakData.text = text;
+         speakData.lang = 'en';
+         speakData.voice = voice;
+         
+         // pass the SpeechSynthesisUtterance to speechSynthesis.speak to start speaking 
+         speechSynthesis.speak(speakData);
+    // document.getElementById("model").pause();
+            playvideo(time);
+         
+         }
+         function playvideo(l){
+
+var t=l*3/2;
+setTimeout(playnow,600);
+if(t<=4){
+    setTimeout(pausenow,t);
+
+}
+else{
+    t=t-4;
+    var k=0;
+    while(t>0){
+if(k==0){
+    playnow();
+}
+else{
+    if(t>=4){
+
+        setTimeout(playnow,4000);
+    }
+    else{
+        setTimeout(playnow,t);
+
+    }
+k=1;
+
+}
+t=t-4;
+    }
+}
+
+
+
+         }
+        function playnow(){
+            document.getElementById("model").play();
+
+         } function pausenow(){
+            document.getElementById("model").pause();
+
+         }
+         
+         
+        function speakvoice(){
+
+            let voices = getVoices();
+         let rate = 1, pitch =1.0, volume = 1;
+        //  let text = "hi sandy i am your sayantan. please ignore sayandip for the sake of our relationship";
+        let text = "malo is a vey good boy .genarally he is failed in different type of exams.now he thinks to give different exams ";
+
+         console.log(voices.length);
+         //10
+        speak(text, voices[10], rate, pitch, volume,countWords(text));
+         
+        //  setTimeout(()=>{ // speak after 2 seconds 
+        //  rate = 0.5; pitch = 1.5, volume = 0.5;
+        //  text = "Spaecking with volume = 0.5 rate = 0.5 pitch = 1.5 ";
+        //  speak(text, voices[10], rate, pitch, volume );
+        //  }, 2000);
+        
+        }
+        function countWords(str) {
+  const arr = str.split(' ');
+
+  return arr.filter(word => word !== '').length;
+}
+
+   </script> -->

@@ -1,0 +1,1657 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+<!DOCTYPE html><html class=''>
+<head>
+    {{!-- <script src='//production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'></script><script src='//production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" /> --}}
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+<script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+<script src="https://use.typekit.net/hoy3lrg.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<style class="cp-pen-styles">body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #000000;
+  font-family: "proxima-nova", "Source Sans Pro", sans-serif;
+  font-size: 1em;
+  letter-spacing: 0.1px;
+  color: #32465a;
+  text-rendering: optimizeLegibility;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+  -webkit-font-smoothing: antialiased;
+}
+
+#frame {
+  width: 95%;
+  min-width: 360px;
+  max-width: 400px;
+  height: 92vh;
+  min-height: 300px;
+  max-height: 720px;
+  background: #E6EAEA;
+}
+@media screen and (max-width: 360px) {
+  #frame {
+    width: 100%;
+    height: 100vh;
+  }
+}
+#frame #sidepanel {
+  float: left;
+ 
+  width: 100%;
+  height: 100%;
+  background: #2c3e50;
+  color: #f5f5f5;
+  overflow: hidden;
+  position: relative;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel {
+    width: 58px;
+    min-width: 58px;
+  }
+}
+#frame #sidepanel #profile {
+  width: 80%;
+  margin: 25px auto;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile {
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px 0 0 0;
+    background: #32465a;
+  }
+}
+#frame #sidepanel #profile.expanded .wrap {
+  height: 210px;
+  line-height: initial;
+}
+#frame #sidepanel #profile.expanded .wrap p {
+  margin-top: 20px;
+}
+#frame #sidepanel #profile.expanded .wrap i.expand-button {
+  -moz-transform: scaleY(-1);
+  -o-transform: scaleY(-1);
+  -webkit-transform: scaleY(-1);
+  transform: scaleY(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
+}
+#frame #sidepanel #profile .wrap {
+  height: 60px;
+  line-height: 60px;
+  overflow: hidden;
+  -moz-transition: 0.3s height ease;
+  -o-transition: 0.3s height ease;
+  -webkit-transition: 0.3s height ease;
+  transition: 0.3s height ease;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap {
+    height: 55px;
+  }
+}
+#frame #sidepanel #profile .wrap img {
+  width: 50px;
+  border-radius: 50%;
+  padding: 3px;
+  border: 2px solid #e74c3c;
+  height: auto;
+  float: left;
+  cursor: pointer;
+  -moz-transition: 0.3s border ease;
+  -o-transition: 0.3s border ease;
+  -webkit-transition: 0.3s border ease;
+  transition: 0.3s border ease;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap img {
+    width: 40px;
+    margin-left: 4px;
+  }
+}
+#frame #sidepanel #profile .wrap img.online {
+  border: 2px solid #2ecc71;
+}
+#frame #sidepanel #profile .wrap img.away {
+  border: 2px solid #f1c40f;
+}
+#frame #sidepanel #profile .wrap img.busy {
+  border: 2px solid #e74c3c;
+}
+#frame #sidepanel #profile .wrap img.offline {
+  border: 2px solid #95a5a6;
+}
+#frame #sidepanel #profile .wrap p {
+  float: left;
+  margin-left: 15px;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap p {
+    display: none;
+  }
+}
+#frame #sidepanel #profile .wrap i.expand-button {
+  float: right;
+  margin-top: 23px;
+  font-size: 0.8em;
+  cursor: pointer;
+  color: #435f7a;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap i.expand-button {
+    display: none;
+  }
+}
+#frame #sidepanel #profile .wrap #status-options {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  width: 150px;
+  margin: 70px 0 0 0;
+  border-radius: 6px;
+  z-index: 99;
+  line-height: initial;
+  background: #435f7a;
+  -moz-transition: 0.3s all ease;
+  -o-transition: 0.3s all ease;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap #status-options {
+    width: 58px;
+    margin-top: 57px;
+  }
+}
+#frame #sidepanel #profile .wrap #status-options.active {
+  opacity: 1;
+  visibility: visible;
+  margin: 75px 0 0 0;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap #status-options.active {
+    margin-top: 62px;
+  }
+}
+#frame #sidepanel #profile .wrap #status-options:before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid #435f7a;
+  margin: -8px 0 0 24px;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap #status-options:before {
+    margin-left: 23px;
+  }
+}
+#frame #sidepanel #profile .wrap #status-options ul {
+  overflow: hidden;
+  border-radius: 6px;
+}
+#frame #sidepanel #profile .wrap #status-options ul li {
+  padding: 15px 0 30px 18px;
+  display: block;
+  cursor: pointer;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap #status-options ul li {
+    padding: 15px 0 35px 22px;
+  }
+}
+#frame #sidepanel #profile .wrap #status-options ul li:hover {
+  background: #496886;
+}
+#frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin: 5px 0 0 0;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {
+    width: 14px;
+    height: 14px;
+  }
+}
+#frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -3px 0 0 -3px;
+  background: transparent;
+  border-radius: 50%;
+  z-index: 0;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {
+    height: 18px;
+    width: 18px;
+  }
+}
+#frame #sidepanel #profile .wrap #status-options ul li p {
+  padding-left: 12px;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #profile .wrap #status-options ul li p {
+    display: none;
+  }
+}
+#frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle {
+  background: #2ecc71;
+}
+#frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle:before {
+  border: 1px solid #2ecc71;
+}
+#frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle {
+  background: #f1c40f;
+}
+#frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle:before {
+  border: 1px solid #f1c40f;
+}
+#frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle {
+  background: #e74c3c;
+}
+#frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle:before {
+  border: 1px solid #e74c3c;
+}
+#frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle {
+  background: #95a5a6;
+}
+#frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle:before {
+  border: 1px solid #95a5a6;
+}
+#frame #sidepanel #profile .wrap #expanded {
+  padding: 100px 0 0 0;
+  display: block;
+  line-height: initial !important;
+}
+#frame #sidepanel #profile .wrap #expanded label {
+  float: left;
+  clear: both;
+  margin: 0 8px 5px 0;
+  padding: 5px 0;
+}
+#frame #sidepanel #profile .wrap #expanded input {
+  border: none;
+  margin-bottom: 6px;
+  background: #32465a;
+  border-radius: 3px;
+  color: #f5f5f5;
+  padding: 7px;
+  width: calc(100% - 43px);
+}
+#frame #sidepanel #profile .wrap #expanded input:focus {
+  outline: none;
+  background: #435f7a;
+}
+#frame #sidepanel #search {
+  border-top: 1px solid #32465a;
+  border-bottom: 1px solid #32465a;
+  font-weight: 300;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #search {
+    display: none;
+  }
+}
+#frame #sidepanel #search label {
+  position: absolute;
+  margin: 10px 0 0 20px;
+}
+#frame #sidepanel #search input {
+  font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+  padding: 10px 0 10px 46px;
+  width: calc(100% - 25px);
+  border: none;
+  background: #32465a;
+  color: #f5f5f5;
+}
+#frame #sidepanel #search input:focus {
+  outline: none;
+  background: #435f7a;
+}
+#frame #sidepanel #search input::-webkit-input-placeholder {
+  color: #f5f5f5;
+}
+#frame #sidepanel #search input::-moz-placeholder {
+  color: #f5f5f5;
+}
+#frame #sidepanel #search input:-ms-input-placeholder {
+  color: #f5f5f5;
+}
+#frame #sidepanel #search input:-moz-placeholder {
+  color: #f5f5f5;
+}
+#frame #sidepanel #contacts {
+  height: calc(100% - 177px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #contacts {
+    height: calc(100% - 149px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  #frame #sidepanel #contacts::-webkit-scrollbar {
+    display: none;
+  }
+}
+#frame #sidepanel #contacts.expanded {
+  height: calc(100% - 334px);
+}
+#frame #sidepanel #contacts::-webkit-scrollbar {
+  width: 8px;
+  background: #2c3e50;
+}
+#frame #sidepanel #contacts::-webkit-scrollbar-thumb {
+  background-color: #243140;
+}
+#frame #sidepanel #contacts ul li.contact {
+  position: relative;
+  padding: 10px 0 15px 0;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #contacts ul li.contact {
+    padding: 6px 0 46px 8px;
+  }
+}
+#frame #sidepanel #contacts ul li.contact:hover {
+  background: #32465a;
+}
+#frame #sidepanel #contacts ul li.contact.active {
+  background: #32465a;
+  border-right: 5px solid #435f7a;
+}
+#frame #sidepanel #contacts ul li.contact.active span.contact-status {
+  border: 2px solid #32465a !important;
+}
+#frame #sidepanel #contacts ul li.contact .wrap {
+  width: 88%;
+  margin: 0 auto;
+  position: relative;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #contacts ul li.contact .wrap {
+    width: 100%;
+  }
+}
+#frame #sidepanel #contacts ul li.contact .wrap span {
+  position: absolute;
+  left: 0;
+  margin: -2px 0 0 -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #2c3e50;
+  background: #95a5a6;
+}
+#frame #sidepanel #contacts ul li.contact .wrap span.online {
+  background: #2ecc71;
+}
+#frame #sidepanel #contacts ul li.contact .wrap span.away {
+  background: #f1c40f;
+}
+#frame #sidepanel #contacts ul li.contact .wrap span.busy {
+  background: #e74c3c;
+}
+#frame #sidepanel #contacts ul li.contact .wrap img {
+  width: 40px;
+  border-radius: 50%;
+  float: left;
+  margin-right: 10px;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #contacts ul li.contact .wrap img {
+    margin-right: 0px;
+  }
+}
+#frame #sidepanel #contacts ul li.contact .wrap .meta {
+  padding: 5px 0 0 0;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #contacts ul li.contact .wrap .meta {
+    display: none;
+  }
+}
+#frame #sidepanel #contacts ul li.contact .wrap .meta .name {
+  font-weight: 600;
+}
+#frame #sidepanel #contacts ul li.contact .wrap .meta .preview {
+  margin: 5px 0 0 0;
+  padding: 0 0 1px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -moz-transition: 1s all ease;
+  -o-transition: 1s all ease;
+  -webkit-transition: 1s all ease;
+  transition: 1s all ease;
+}
+#frame #sidepanel #contacts ul li.contact .wrap .meta .preview span {
+  position: initial;
+  border-radius: initial;
+  background: none;
+  border: none;
+  padding: 0 2px 0 0;
+  margin: 0 0 0 1px;
+  opacity: .5;
+}
+#frame #sidepanel #bottom-bar {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+#upper-bar{
+  border: none;
+  width: 100%;
+  padding: 10px 0;
+  background: #32465a;
+  color: #f5f5f5;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+
+}
+#frame #sidepanel #bottom-bar button {
+  float: left;
+  border: none;
+  width: 50%;
+  padding: 10px 0;
+  background: #32465a;
+  color: #f5f5f5;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-family: "proxima-nova",  "Source Sans Pro", sans-serif;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #bottom-bar button {
+    float: none;
+    width: 100%;
+    padding: 15px 0;
+  }
+}
+#frame #sidepanel #bottom-bar button:focus {
+  outline: none;
+}
+#frame #sidepanel #bottom-bar button:nth-child(1) {
+  border-right: 1px solid #2c3e50;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #bottom-bar button:nth-child(1) {
+    border-right: none;
+    border-bottom: 1px solid #2c3e50;
+  }
+}
+#frame #sidepanel #bottom-bar button:hover {
+  background: #435f7a;
+}
+#frame #sidepanel #bottom-bar button i {
+  margin-right: 3px;
+  font-size: 1em;
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #bottom-bar button i {
+    font-size: 1.3em;
+  }
+}
+@media screen and (max-width: 230px) {
+  #frame #sidepanel #bottom-bar button span {
+    display: none;
+  }
+}
+.image {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      width: 80%;background:;margin:10%;
+    }
+
+    .image img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: contain;
+    }
+    .typing{
+      font-size: xx-small;
+      color: greenyellow;
+      float: inline-end;
+      margin-top: 4%;
+      visibility: hidden;
+    }
+    .unseentime{
+    visibility: ;
+    float:right;
+    margin-right:1%;
+    margin-top:-9%;
+     color:greenyellow;
+     text-align: center;
+    }
+    .unseenno{
+float:right;margin-top:-9%; border-radius:100%;background:greenyellow;color:black;width: 25px;text-align: center;visibility: ;margin-right: -10%;
+    }
+.center {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+.wave {
+  width: 5px;
+  height: 100px;
+  background: linear-gradient(45deg, cyan, #fff);
+  margin: 10px;
+  animation: wave 1s linear infinite;
+  border-radius: 20px;
+}
+.wave:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.wave:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.wave:nth-child(4) {
+  animation-delay: 0.3s;
+}
+.wave:nth-child(5) {
+  animation-delay: 0.4s;
+}
+.wave:nth-child(6) {
+  animation-delay: 0.5s;
+}
+.wave:nth-child(7) {
+  animation-delay: 0.6s;
+}
+.wave:nth-child(8) {
+  animation-delay: 0.7s;
+}
+.wave:nth-child(9) {
+  animation-delay: 0.8s;
+}
+.wave:nth-child(10) {
+  animation-delay: 0.9s;
+}
+
+@keyframes wave {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+#status-options::-webkit-scrollbar{
+    display: none;
+  }
+
+
+</style></head><body>
+<!-- 
+
+A concept for a chat interface. 
+
+Try writing a new message! :)
+
+
+Follow me here:
+Twitter: https://twitter.com/thatguyemil
+Codepen: https://codepen.io/emilcarlsson/
+Website: http://emilcarlsson.se/
+
+-->
+<div id="loader" class="center">
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+  <div class="wave"></div>
+</div>
+
+
+<div style="display: none;" id="frame">
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+				<img id="profile-img" style="object-fit:fill;height:60px;width:60px" src="http://emilcarlsson.se/assets/mikeross.png" class="online" alt="" />
+				<strong style="font-size: larger;"><p id="showname"><script> document.getElementById("showname").innerHTML=localStorage.getItem("username")</script></p></strong>
+			<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+				<div id="status-options" style="height:200px;width:75%;
+      overflow-y: scroll;
+        ">
+            <div id="showdp" class="image">
+
+
+
+          </div>
+						</div>
+				<div id="expanded">
+					<label for="twitter"><i class="fa fa-user" aria-hidden="true"></i></label>
+					<input name="twitter" id="updatename" type="text" disabled="true"  />
+					<label for="twitter"><i class="fa fa-bars" aria-hidden="true"></i></label>
+					<input name="twitter" style="width:85%" id="updateabout" type="text"  /><i onclick="updateabout()" class="fa fa-check" aria-hidden="true"></i>
+					<label for="twitter"><i  class="fa fa-envelope " aria-hidden="true"></i></label>
+					<input name="twitter" id="updatephone" type="text" disabled="true"  />
+				</div>
+			</div>
+          <button style="background:greenyellow;color:#000000;width:50%;position:relative;margin-top:5%;height:40px;margin-left:40%;display:none">Update</button>
+		</div>
+		<div id="search">
+			<input type="text" onkeyup="filterBySearch(this);" id="searchcontact" placeholder="Search contacts..." />
+            <i onclick="resetvalueofsearch()" class="fa fa-close" aria-hidden=""></i>
+		</div>
+        <div id="contacts">
+			<ul id="showchatul">
+                <div id="showchat">
+
+				{{!-- <li class="contact">
+					<div class="wrap">
+						<span class="contact-status online"></span>
+						<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+						<div class="meta">
+							<p class="name">Louis Litt</p>
+							<p class="preview">You just got LITT up, Mike.</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact active">
+					<div class="wrap">
+						<span class="contact-status busy"></span>
+						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<div class="meta">
+							<p class="name">Harvey Specter</p>
+							<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status away"></span>
+						<img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
+						<div class="meta">
+							<p class="name">Rachel Zane</p>
+							<p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status online"></span>
+						<img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
+						<div class="meta">
+							<p class="name">Donna Paulsen</p>
+							<p class="preview">Mike, I know everything! I'm Donna..</p>
+                            <p style="float:right;margin-top:-5%; border-radius:100%;background:greenyellow;color:black;width: 25px;text-align: center;"><strong>2</strong></p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status busy"></span>
+						<img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
+						<div class="meta">
+							<p class="name">Jessica Pearson</p>
+							<p class="preview">Have you finished the draft on the Hinsenburg deal?</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status"></span>
+						<img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
+						<div class="meta">
+							<p class="name">Harold Gunderson</p>
+							<p class="preview">Thanks Mike! :)</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status"></span>
+						<img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
+						<div class="meta">
+							<p class="name">Daniel Hardman</p>
+							<p class="preview">We'll meet again, Mike. Tell Jessica I said 'Hi'.</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status busy"></span>
+						<img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
+						<div class="meta">
+							<p class="name">Katrina Bennett</p>
+							<p class="preview">I've sent you the files for the Garrett trial.</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status"></span>
+						<img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
+						<div class="meta">
+							<p class="name">Charles Forstman</p>
+							<p class="preview">Mike, this isn't over.</p>
+						</div>
+					</div>
+				</li>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status"></span>
+						<img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
+						<div class="meta">
+							<p class="name">Jonathan Sidwell</p>
+							<p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
+						</div>
+					</div>
+				</li> --}}
+                </div>
+
+			</ul>
+		</div>
+        <div id="bottom-bar">
+            <div style="display: none;box-shadow:2 px 2 px white;border-bottom:2 px solid #E6EAEA:relative" id="showcontacts">
+
+            <button style="width: 33%;" onclick="showall()"  id="showall"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>All Contacts</span></button>
+			<button style="width: 33%;" onclick="showcontacts()" id="showinbox"><i class="fa fa-user" aria-hidden="true"></i> <span>Inbox</span></button>
+			<button style="width: 34%;" class="buttoninfilter" id="showgrp"><i class="fa fa-lock" aria-hidden="true"></i> <span>Group </span></button>
+                {{!-- <hr>
+                <hr> --}}
+                <hr>
+                <hr>
+            </div>
+			<button onclick="showfilter()" ><i class="fa fa-filter " aria-hidden="true"></i></i> <span>Filter</span></button>
+			<button onclick="gotosettings()" ><i class="fa fa-cog fa-fw"  aria-hidden="true"></i> <span>Settings</span></button>
+			{{!-- <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button> --}}
+			
+
+			
+			
+		</div>
+        
+	</div>
+	
+</div>
+{{!-- <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'> --}}
+{{!-- </script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script> --}}
+<script >$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
+$("#profile-img").click(function() {
+	$("#status-options").toggleClass("active");
+});
+
+$(".expand-button").click(function() {
+  $("#profile").toggleClass("expanded");
+	$("#contacts").toggleClass("expanded");
+});
+$(".expand1-button").click(function() {
+
+  $("#profile").toggleClass("showgrp");
+	$("#contacts").toggleClass("showgrp");
+});
+
+$("#status-options ul li").click(function() {
+	$("#profile-img").removeClass();
+	$("#status-online").removeClass("active");
+	$("#status-away").removeClass("active");
+	$("#status-busy").removeClass("active");
+	$("#status-offline").removeClass("active");
+	$(this).addClass("active");
+	
+	if($("#status-online").hasClass("active")) {
+		$("#profile-img").addClass("online");
+	} else if ($("#status-away").hasClass("active")) {
+		$("#profile-img").addClass("away");
+	} else if ($("#status-busy").hasClass("active")) {
+		$("#profile-img").addClass("busy");
+	} else if ($("#status-offline").hasClass("active")) {
+		$("#profile-img").addClass("offline");
+	} else {
+		$("#profile-img").removeClass();
+	};
+	
+	$("#status-options").removeClass("active");
+});
+
+function newMessage() {
+	message = $(".message-input input").val();
+	if($.trim(message) == '') {
+		return false;
+	}
+	$('<li class="sent"><img  src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+	$('.message-input input').val(null);
+	$('.contact.active .preview').html('<span>You: </span>' + message);
+	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+};
+
+$('.submit').click(function() {
+  newMessage();
+});
+
+$(window).on('keydown', function(e) {
+  if (e.which == 13) {
+    newMessage();
+    return false;
+  }
+});
+var url="http://localhost:3000";
+var socket=io('/user',{
+  auth:{
+    toid:localStorage.getItem(("toid")),
+    token:localStorage.getItem("userid"),
+  }
+});
+
+function loadscreen(){
+   document.getElementById("loader").style.display="none";
+  document.getElementById("frame").style.display="";
+}
+function offscreen(){
+    document.getElementById("loader").style.display="";
+  document.getElementById("frame").style.display="none";
+}
+
+
+window.addEventListener('online',  updateOnlineStatus);
+window.addEventListener('offline', updateOnlineStatus);
+
+function updateOnlineStatus(event) {
+  var isOnline = navigator.onLine
+if (isOnline) {
+    //alert("Awesome! You are online");
+  socket.emit("setonlinebynet",{userid:localStorage.getItem("userid")});
+    loadscreen();
+} else {
+    alert("Please check your Internet Connectivity");
+  socket.emit("setofflinebynet",{userid:localStorage.getItem("userid")});
+    offscreen();
+}
+
+  }
+
+
+updateOnlineStatus("e");
+
+
+
+
+var isfilter=0;
+
+function showfilter(){
+if(isfilter==0){
+    document.getElementById("showcontacts").style.display="block";
+    isfilter=1;
+    
+}
+else{
+    document.getElementById("showcontacts").style.display="none";
+     
+    isfilter=0;
+
+}
+}
+
+function checkfilter(){
+  if(nowfilter=="inbox"){
+showcontacts();
+  }
+  else{
+    showall();
+  }
+}
+window.setInterval(function(){
+  if(rorf==0){
+
+   //checkfilter();
+  }
+   }, 1000);
+
+
+
+
+
+    var alluser=[];
+    var allexistuser=[];
+    function setusers(a){
+      alluser=a;
+    }
+     function setallusers(a){
+      allexistuser=a;
+    }
+   
+    var nowfilter="inbox";
+    function setfilter(a){
+      nowfilter=a;
+    }
+
+
+
+
+
+function setalldetailsofcontacts(){
+     var ds = { userid:localStorage.getItem("userid") };
+
+    fetch(url+"/Getuser", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+  })
+
+    .then((res) => res.json())
+        .then((data) => {
+          setallusers(data);
+localStorage.setItem("allcontacts",JSON.stringify(data));
+console.log(data);
+
+        })
+        .catch((err) => console.log(err));
+
+
+
+
+}
+setalldetailsofcontacts();
+
+
+function showall(){
+  setfilter("allcontacts");
+ document.getElementById("showinbox").style.background="#2c3e50";
+    document.getElementById("showall").style.background="black";
+     
+
+        var ds = { userid:localStorage.getItem("userid") };
+
+    fetch(url+"/Getuser", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+
+    })
+
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        alluser=data;
+        setusers(data);
+
+localStorage.setItem("allcontacts",JSON.stringify(data))
+
+        var all="";
+
+for(var i=0;i<alluser.length;i++){
+  var showonlinestatus="";
+  if(alluser[i].online==1){
+    showonlinestatus=`
+						<span class="contact-status online"></span>
+    `;
+  }
+  else{
+			 showonlinestatus=`
+						<span id="online`+alluser[i].userid+`"  class="contact-status busy"></span>
+    `;
+
+  }
+    if(alluser[i].userid!=localStorage.getItem("userid")){
+
+        all=all+`<li onclick=gotouser("`+alluser[i].userid+`","`+alluser[i].username+`")  class="contact">
+					<div class="wrap">
+					`+showonlinestatus+`
+						<img id="dpuser`+alluser[i].userid+`" style="object-fit:fill;height:40px;width:40px" src="dp/dp`+alluser[i].dp+`.png" alt="" />
+						<div class="meta">
+                            
+							<p id="name`+alluser[i].userid+`" class="name"><a>`+alluser[i].username+`</a></p>
+							<p id="about`+alluser[i].userid+`" class="preview">`+alluser[i].about+`</p>
+						</div>
+					</div>
+				</li>
+                
+				`
+    }
+      }
+      document.getElementById("showchat").innerHTML=all;
+    
+      })
+      .catch((err) => console.log(err));
+
+}
+function showcontacts(){
+  setfilter("inbox");
+  document.getElementById("showall").style.background="#2c3e50";
+    document.getElementById("showinbox").style.background="black";
+   
+    
+    var alluser=[];
+        var ds = { userid:localStorage.getItem("userid") };
+
+    fetch(url+"/Getinboxcontacts", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(ds),
+
+    })
+
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(data[0]);
+        alluser=data;
+        setusers(data);
+
+        //console.log(alluser[0].totaltoid);
+
+        var all="";
+
+          allexistuser=JSON.parse(localStorage.getItem("allcontacts"));
+
+
+for(var i=0;i<alluser[0].totaltoid.length;i++){
+    var a=(alluser[0].totaltoid[i].lastmessage[0].msgid);
+    var b="you :";
+    if(a[0]=="r"){
+        b="";
+    }
+    var index = allexistuser.findIndex(item => item.userid === alluser[0].totaltoid[i].toid);
+    var showonlinestatus="";
+    if(allexistuser[index].online==1){
+    showonlinestatus=`
+						<span id="online`+alluser[0].totaltoid[i].toid+`" class="contact-status online"></span>
+    `;
+  }
+  else{
+			 showonlinestatus=`
+						<span id="online`+alluser[0].totaltoid[i].toid+`" class="contact-status busy"></span>
+    `;
+
+  }
+    if(alluser[0].totaltoid[i].unseen==0){
+                  all=all+`<li id="all`+alluser[0].totaltoid[i].toid+`"  onclick=gotouser("`+alluser[0].totaltoid[i].toid+`","`+alluser[0].totaltoid[i].toname+`") class="contact">
+                            <div class="wrap">
+                              {{!-- <span class="contact-status busy"></span> --}}
+                              `+showonlinestatus+`
+                              <img id="dpuser`+alluser[0].totaltoid[i].toid+`" style="object-fit:fill;height:40px;width:40px" src="dp/dp`+allexistuser[index].dp+`.png" alt="" />
+                              <div class="meta">
+                                  <p class="name"><a>`+alluser[0].totaltoid[i].toname+`</a> <p id="typing`+alluser[0].totaltoid[i].toid+`" class="typing"> Typing...... <p></p>
+                                  <p id="chatbody`+alluser[0].totaltoid[i].toid+`" class="preview">`+b+` `+alluser[0].totaltoid[i].lastmessage[0].chatbody+`</p>
+                                  <p id="unseen`+alluser[0].totaltoid[i].toid+`" class="unseenno" style="visibility:hidden" ><strong>`+alluser[0].totaltoid[i].unseen+`</strong></p>
+                                  <p id="time`+alluser[0].totaltoid[i].toid+`" class="unseentime" style="visibility:hidden"><strong>`+alluser[0].totaltoid[i].lastmessage[0].time+`</strong></p>
+                     
+                              </div>
+                            </div>
+                          </li>
+                          `
+    }
+
+          
+    else{
+            all=all+`<li id="all`+alluser[0].totaltoid[i].toid+`" onclick=gotouser("`+alluser[0].totaltoid[i].toid+`","`+alluser[0].totaltoid[i].toname+`") class="contact">
+                    <div class="wrap">
+                `+showonlinestatus+`
+
+                      {{!-- <span class="contact-status busy"></span> --}}
+                        <img id="dpuser`+alluser[0].totaltoid[i].toid+`" style="object-fit:fill;height:40px;width:40px" src="dp/dp`+allexistuser[index].dp+`.png" alt="" />
+                         <div class="meta">
+                        <p class="name"><a>`+alluser[0].totaltoid[i].toname+`</a> <p id="typing`+alluser[0].totaltoid[i].toid+`" class="typing"> Typing...... <p></p>
+                        <p id="chatbody`+alluser[0].totaltoid[i].toid+`" class="preview">`+b+` `+alluser[0].totaltoid[i].lastmessage[0].chatbody+`</p>
+                                  <p id="unseen`+alluser[0].totaltoid[i].toid+`" class="unseenno"><strong>`+alluser[0].totaltoid[i].unseen+`</strong></p>
+                                  <p id="time`+alluser[0].totaltoid[i].toid+`" class="unseentime"><strong>`+alluser[0].totaltoid[i].lastmessage[0].time+`</strong></p>
+                      </div>
+                    </div>
+                  </li>
+                  `;
+              
+
+      }
+        
+      }
+      document.getElementById("showchat").innerHTML=all;
+    if(data.length==0 || data==null || data==undefined){
+      document.getElementById("showchat").innerHTML="";
+
+    }
+      })
+      .catch((err) => console.log(err));
+
+      
+}
+showcontacts();
+function gotouser(toid,name){
+
+    localStorage.setItem("tousername",name);
+    localStorage.setItem("toid", toid);
+    console.log(document.getElementById("time"+toid));
+    socket.emit("gotouser",{userid:localStorage.getItem("userid"),toid:toid});
+if(nowfilter=="inbox" && document.getElementById("time"+toid)!=null){
+
+document.getElementById("time"+toid).style.visibility="hidden";
+document.getElementById("unseen"+toid).style.visibility="hidden";
+}
+    window.location.replace("/chat");
+   //history.pushState({}, "", "/chat");
+
+}
+
+  var rorf=0;
+function setreloadorfilter(a){
+  rorf=a;
+}
+
+
+
+
+ function filterBySearch(d){ 
+
+var c=document.getElementById("searchcontact").value;
+if(c.trim()==""){
+  setreloadorfilter(0);
+}
+else{
+  setreloadorfilter(1);
+
+}
+
+
+
+ var all="";
+
+ul = document.getElementById("showchatul");
+    li = ul.getElementsByTagName("li");
+    console.log(li);
+    for (i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        var txtValue = a.textContent || a.innerText;
+
+        if (txtValue.toUpperCase().indexOf(c.toUpperCase()) > -1) {
+           console.log(txtValue);
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+
+
+
+  };
+function resetvalueofsearch(){
+  document.getElementById("searchcontact").value="";
+  filterBySearch("");
+}
+
+
+
+
+function showdetails(){
+  console.log(alluser);
+  document.getElementById("updatename").value=localStorage.getItem("username");
+  document.getElementById("updatephone").value=localStorage.getItem("email");
+  document.getElementById("updateabout").value=localStorage.getItem("about");
+}
+showdetails();
+
+//# sourceURL=pen.js
+
+
+function setonlineseen(a){
+var ds = {  ownid: localStorage.getItem("userid"), value: a };
+      console.log("hi"+a);
+
+      fetch(url+"/setonline", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(ds),
+      })
+
+        .then((res) => res.json())
+        .then((data) => {
+
+        })
+        .catch((err) => console.log(err));
+
+
+
+
+}
+
+window.onblur = function() {
+  // This code will be executed when the window loses focus.
+   //setonlineseen(0);
+};
+window.onfocus = function() {
+  // This code will be executed when the window loses focus.
+  // setonlineseen(1);
+};
+
+ 
+
+
+
+ function gotosettings() {
+   
+    window.location.replace("settings");
+  }
+
+
+
+
+
+socket.on("showchat",function(data){
+  console.log(data);
+
+if(data.lastmessage.toid==localStorage.getItem("userid")){
+
+Notification.requestPermission().then((perm) => {
+          if (perm === "granted") {
+            new Notification("New Message", {
+              body: data.lastmessage.ownname+`: `+data.lastmessage.chatbody,
+            });
+          }
+        });
+
+          var allexistuser=JSON.parse(localStorage.getItem("allcontacts"));
+
+console.log("chatbody"+data.lastmessage.ownid);
+ var index = allexistuser.findIndex(item => item.userid == data.userid);
+    console.log(allexistuser);
+
+var showonlinestatus="";
+    if(allexistuser[index].online==1){
+    showonlinestatus=`
+						<span id="online`+data.lastmessage.ownid+`" class="contact-status online"></span>
+    `;
+  }
+  else{
+			 showonlinestatus=`
+						<span id="online`+data.lastmessage.ownid+`" class="contact-status busy"></span>
+    `;
+
+  }
+  var typinghtml=`
+  <p id="typing`+data.lastmessage.ownid+`" class="typing"> Typing...... <p>`;
+
+  if(document.getElementById("chatbody"+data.lastmessage.ownid)!=null){
+
+var elem=document.getElementById("all"+data.lastmessage.ownid);
+  
+document.getElementById("chatbody"+data.lastmessage.ownid).innerHTML=data.lastmessage.chatbody;
+
+
+document.getElementById("time"+data.lastmessage.ownid).style.visibility="visible";
+document.getElementById("unseen"+data.lastmessage.ownid).style.visibility="visible";
+
+
+document.getElementById("time"+data.lastmessage.ownid).innerHTML=data.lastmessage.time;
+document.getElementById("unseen"+data.lastmessage.ownid).innerHTML=data.unseenforthisuser;
+
+elem.parentNode.removeChild(elem);
+
+   
+document.getElementById("showchat").innerHTML=`<li id="all`+data.lastmessage.ownid+`" i onclick=gotouser("`+data.lastmessage.ownid+`","`+data.lastmessage.ownname+`") class="contact">
+					<div class="wrap">
+                        <img id="dpuser`+data.lastmessage.ownid+`" style="object-fit:fill;height:40px;width:40px" src="dp/dp`+allexistuser[index].dp+`.png" alt="" />
+                `+showonlinestatus+`
+						<div class="meta">
+							<p id="name`+data.lastmessage.ownid+`" class="name"><a>`+data.lastmessage.ownname+`</a> `+typinghtml+`</p>
+							<p id="chatbody`+data.lastmessage.ownid+`" class="preview"> `+data.lastmessage.chatbody+`</p>
+					              <p id="unseen`+data.lastmessage.ownid+`" class="unseenno"><strong>`+data.unseenforthisuser+`</strong></p>
+					              <p id="time`+data.lastmessage.ownid+`" class="unseentime"><strong>`+data.lastmessage.time+`</strong></p>
+						</div>
+					</div>
+				</li>
+				`+document.getElementById("showchat").innerHTML;
+
+
+
+  }
+
+
+
+
+  else{
+          var allexistuser=JSON.parse(localStorage.getItem("allcontacts"));
+
+
+    document.getElementById("showchat").innerHTML=`<li id="all`+data.lastmessage.ownid+`" i onclick=gotouser("`+data.lastmessage.ownid+`","`+data.lastmessage.ownname+`") class="contact">
+					<div class="wrap">
+                        <img id="dpuser`+data.lastmessage.ownid+`" style="object-fit:fill;height:40px;width:40px" src="dp/dp`+allexistuser[index].dp+`.png" alt="" />
+                `+showonlinestatus+`
+
+						<div class="meta">
+							<p class="name"><a>`+data.lastmessage.ownname+`</a> `+typinghtml+`</p>
+							<p id="chatbody`+data.lastmessage.ownid+`" class="preview"> `+data.lastmessage.chatbody+`</p>
+					              <p id="unseen`+data.lastmessage.ownid+`" class="unseenno"><strong>`+data.unseenforthisuser+`</strong></p>
+					              <p id="time`+data.lastmessage.ownid+`" class="unseentime"><strong>`+data.lastmessage.time+`</strong></p>
+						</div>
+					</div>
+				</li>
+				`+document.getElementById("showchat").innerHTML;
+
+
+
+
+
+  }
+}
+
+})
+
+
+
+socket.on("onlineuser",function(data){
+  if(document.getElementById("online"+data.userid)!=null){
+
+    document.getElementById("online"+data.userid).className="contact-status online";
+  }
+})
+socket.on("offlineuser",function(data){
+
+     if(document.getElementById("online"+data.userid)!=null){
+
+    document.getElementById("online"+data.userid).className="contact-status busy";
+  }
+})
+
+
+
+
+function updateabout(){
+  var newabout=document.getElementById("updateabout").value;
+  if(newabout!=localStorage.getItem("about")){
+var ds = {  ownid: localStorage.getItem("userid"), about: newabout };
+
+      fetch(url+"/updateabout", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(ds),
+      })
+
+        .then((res) => res.json())
+        .then((data) => {
+
+        })
+        .catch((err) => console.log(err));
+document.getElementById("updateabout").value=newabout;
+localStorage.setItem("about",newabout);
+alert("Your about updated now.")
+
+  }
+  else{
+    alert("Change Your about now.")
+  }
+}
+
+
+var profileimg=localStorage.getItem("dp");
+document.getElementById("profile-img").src="dp/dp"+profileimg+".png";
+
+
+var totaldp=30;
+
+function showalldp(){
+  
+  var alldp="";
+
+for(var i=1;i<=totaldp;i++){
+alldp=alldp+`
+  <img  style="object-fit:fill;height:50px;width:50px" onclick="setdp(`+i+`)" id="dp`+i+`" src="dp/dp`+i+`.png" alt="dp/`+i+`.png">
+
+`;
+  }
+  
+  document.getElementById("showdp").innerHTML=alldp;
+  
+for(var i=1;i<=totaldp;i++){
+  document.getElementById("dp"+i).style.borderColor="white";
+  }
+  document.getElementById("dp"+profileimg).style.borderColor="yellow";
+
+
+}
+showalldp();
+
+function setdp(a){
+  for(var i=1;i<=totaldp;i++){
+
+  document.getElementById("dp"+i).style.borderColor="white";
+  }
+  document.getElementById("dp"+a).style.borderColor="Yellow";
+
+
+  var ds = {  ownid: localStorage.getItem("userid"), dp: a };
+      console.log("hi"+a);
+
+    
+        socket.emit("setdpbysocket",ds);
+
+
+localStorage.setItem("dp",a);
+document.getElementById("profile-img").src="dp/dp"+a+".png";
+
+
+
+}
+
+
+socket.on("dpchanged",function(data){
+          var allexistuser=JSON.parse(localStorage.getItem("allcontacts"));
+
+if(document.getElementById("dpuser"+data.ownid)!=null){
+
+document.getElementById("dpuser"+data.ownid).src="dp/dp"+data.dp+".png";
+}
+    var index = allexistuser.findIndex(item => item.userid ==data.ownid);
+    allexistuser[index].dp=data.dp;
+localStorage.setItem("allcontacts",JSON.stringify(allexistuser));
+
+})
+
+socket.on("showtypingstart",function(data){
+console.log(data);
+  if(data.toid==localStorage.getItem("userid") && document.getElementById("chatbody"+data.ownid)!=null){
+    document.getElementById("typing"+data.ownid).style.visibility="visible";
+  }
+
+
+})
+
+socket.on("showtypingend",function(data){
+
+  if(data.toid==localStorage.getItem("userid") && document.getElementById("chatbody"+data.ownid)!=null){
+    document.getElementById("typing"+data.ownid).style.visibility="hidden";
+  }
+
+
+})
+
+</script>
+</body></html>
+{{!-- 
+  fetch("http://localhost:3000/setdp", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(ds),
+      })
+
+        .then((res) => res.json())
+        .then((data) => {
+
+        })
+        .catch((err) => console.log(err));
+
+
+ --}}
+
+{{!-- var inb=0;
+function showrepeatcontact(inb){
+
+
+if(inb==0){
+
+window.setInterval(function(){
+   //showcontacts();
+   }, 1000);
+}
+else{
+    window.setInterval(function(){
+   //showall();
+  
+   }, 10000);
+
+}
+} --}}
+
+{{!-- 
+
+
+ if(nowfilter=="inbox"){
+
+
+ 
+ //console.log(alluser);
+     for(var i=0;i<alluser[0].totaltoid.length;i++){
+    var a=(alluser[0].totaltoid[i].lastmessage[0].msgid);
+    var b="you :";
+    if(a[0]=="r"){
+        b="";
+    }
+   // var bane=;
+//console.log(c);
+    if(alluser[0].totaltoid[i].toname.startsWith(c)==true){
+
+    
+
+    if(alluser[0].totaltoid[i].unseen==0){
+all=all+`<li  onclick=gotouser("`+alluser[0].totaltoid[i].toid+`","`+alluser[0].totaltoid[i].toname+`") class="contact">
+					<div class="wrap">
+						<img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
+						<div class="meta">
+							<p class="name">`+alluser[0].totaltoid[i].toname+`</p>
+							<p id="chatbody`+alluser[0].totaltoid[i].toid+`" class="preview">`+b+` `+alluser[0].totaltoid[i].lastmessage[0].chatbody+`</p>
+              <p id="unseen`+alluser[0].totaltoid[i].toid+`" style="visibility: hidden;float:right;margin-top:-9%; border-radius:100%;background:greenyellow;color:black;width: 25px;text-align: center;"><strong>``</strong></p>
+					              <p id="time`+alluser[0].totaltoid[i].toid+`" style="visibility: hidden;float:right;margin-right:13%;margin-top:-9%; color:greenyellow;text-align: center;"><strong>``</strong></p>
+					
+						</div>
+					</div>
+				</li>
+				`
+    }
+
+    else{
+
+      all=all+`<li onclick=gotouser("`+alluser[0].totaltoid[i].toid+`","`+alluser[0].totaltoid[i].toname+`") class="contact">
+					<div class="wrap">
+						<img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
+						<div class="meta">
+							<p class="name">`+alluser[0].totaltoid[i].toname+`</p>
+							<p  id="chatbody`+alluser[0].totaltoid[i].toid+`" class="preview">`+b+` `+alluser[0].totaltoid[i].lastmessage[0].chatbody+`</p>
+					              <p id="unseen`+alluser[0].totaltoid[i].toid+`" style="float:right;margin-top:-9%; border-radius:100%;background:greenyellow;color:black;width: 25px;text-align: center;"><strong>`+alluser[0].totaltoid[i].unseen+`</strong></p>
+					              <p id="time`+alluser[0].totaltoid[i].toid+`" style="float:right;margin-right:13%;margin-top:-9%; color:greenyellow;text-align: center;"><strong>`+alluser[0].totaltoid[i].lastmessage[0].time+`</strong></p>
+						</div>
+					</div>
+				</li>
+				`;
+    }
+        
+      }
+
+
+}
+      document.getElementById("showchat").innerHTML=all;
+
+ }
+ else{
+  for(var i=0;i<alluser.length;i++){
+
+    if(alluser[i].username.startsWith(c)==true){
+
+    if(alluser[i].userid!=localStorage.getItem("userid")){
+
+    
+        all=all+`<li onclick=gotouser("`+alluser[i].userid+`","`+alluser[i].username+`")  class="contact">
+					<div class="wrap">
+						<span class="contact-status busy"></span>
+						<img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
+						<div class="meta">
+                            
+							<p class="name">`+alluser[i].username+`</p>
+							<p class="preview">`+alluser[i].about+`</p>
+						</div>
+					</div>
+				</li>
+                
+				`
+    }
+      }
+      document.getElementById("showchat").innerHTML=all;
+  }
+ }
+  
+ --}}
