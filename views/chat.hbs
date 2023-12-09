@@ -1151,9 +1151,10 @@ background-image: url("chatpage/swipeicon.png");
 
     </div>
     
-    <input type="text" id="chatinput" class="ip-msg" onkeypress="typing()" placeholder="Lets's Say" />
+    <input type="text" id="chatinput" class="ip-msg"  placeholder="Lets's Say" />
     <button id="sendbutton" onclick="sendmessage()">
       <i class="fa fa-send"></i>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
 
     </button>
   </div>
@@ -1177,9 +1178,21 @@ background-image: url("chatpage/swipeicon.png");
 
 </html>
 <script>
+var url="https://dropling.onrender.com";
+
+
+ jQuery(function($) { // DOM ready and $ alias secured
+
+  $('#chatinput').on('input', function(e){
+    var key = e.which || this.value.substr(-1).charCodeAt(0);
+    typing();
+
+  });
+
+});
+
 {{!-- var url="http://localhost:3000"; --}}
   
-var url="https://dropling.onrender.com";
 
 if(localStorage.getItem("toid")=="null"){
     window.location.replace("contact");
