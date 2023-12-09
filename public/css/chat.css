@@ -1,0 +1,951 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+  }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: #000000;
+  }
+
+  .container {
+    position: relative;
+    width: 430px;
+    height: 900px;
+    left: 50%;
+    margin: 0px auto;
+    margin-left: -205px;
+    display: inline-block;
+  }
+
+  @media only screen and (max-device-width: 600px) {
+    body{
+      zoom: 2.5;
+      margin-left: 200px;
+      width: 1vh;
+      height: 0.7vh;
+    }
+    
+  }
+
+
+  div.app {
+    position: absolute;
+    width: 380px;
+    height: 700px;
+    background: #5850c0;
+    background-image: url("chatpage/chatappbackground8.png");
+    background-repeat: no-repeat;
+object-fit: cover;
+background-size: cover;
+    margin-top: 30px;
+  }
+
+  div.app:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    display: inline-block;
+    box-shadow: inset 0 80px 85px -35px #3c33b0;
+    z-index: 0;
+  }
+
+  div.app:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    display: inline-block;
+    bottom: 0;
+    box-shadow: inset 0 -80px 85px -35px #3c33b0;
+    z-index: 0;
+  }
+
+  div.app div.head {
+    z-index: 1;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 50px;
+    line-height: 48px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+
+    background: #271c5d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: inset 0 -15px 35px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  div.head span.title {
+    position: absolute;
+    width: 100%;
+    display: inline-block;
+    left: 0;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 2px;
+    color: #fff;
+  }
+
+  div.head span.messages-notification {
+    position: relative;
+    float: left;
+    font-size: 18px;
+    font-weight: normal;
+    margin-left: 15px;
+    color: #fff;
+    margin-top: 2px;
+  }
+
+  div.head span.messages-notification span.count {
+    position: absolute;
+    font-size: 10px;
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    background: #f42052;
+    line-height: 17px;
+    border-radius: 100%;
+    margin-top: 6px;
+    margin-left: -10px;
+  }
+
+  div.head span.create-new {
+    float: right;
+    font-size: 17px;
+    font-weight: normal;
+    margin-right: 15px;
+    color: #fff;
+    margin-top: 2px;
+  }
+
+  .clearfix::after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+
+  div.search-bar {
+    position: relative;
+    margin-top: 15px;
+    text-align: center;
+    z-index: 1;
+  }
+
+  div.search-bar .ip-search {
+    width: 85%;
+    border: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 50px;
+    border: 1px solid rgba(60, 51, 176, 0.7);
+    box-shadow: inset 0 25px 25px -15px rgba(60, 51, 176, 0.15);
+  }
+
+  div.search-bar .ip-search::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+    font-size: 14px;
+  }
+
+  div.search-bar i.fa {
+    position: absolute;
+    right: 0;
+    margin-right: 25px;
+    margin-top: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+  }
+
+  .friend-list {
+    margin-top: 35px;
+  }
+
+  .friend-list ul li {
+    position: relative;
+    list-style: none;
+    float: left;
+    width: 20%;
+    text-align: center;
+  }
+
+  .friend-list ul li img {
+    border-radius: 100%;
+    border: 3px solid rgba(255, 255, 255, 1);
+  }
+
+  .friend-list ul li:nth-child(2n+1) img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .friend-list ul li:nth-child(2n+2) img {
+    width: 50px;
+    height: 50px;
+    transform: translateY(-10%);
+  }
+
+  .friend-list ul li:nth-child(3) img {
+    width: 70px;
+    height: 70px;
+    transform: translateY(-20%);
+  }
+
+  .friend-list ul li:nth-child(2n+1) img,
+  .friend-list ul li:nth-child(2n+1) span.name {
+    opacity: 0.4;
+  }
+
+  .friend-list ul li:nth-child(2n+2) img,
+  .friend-list ul li:nth-child(2n+2) span.name {
+    opacity: 0.7;
+  }
+
+  .friend-list ul li.active img,
+  .friend-list ul li.active span.name {
+    opacity: 1;
+  }
+
+  .friend-list ul li.active img {
+    box-shadow: 1px 1px 0 rgba(39, 28, 93, 0.5),
+      -1px -1px 0 rgba(39, 28, 93, 0.5),
+      0 0 35px rgba(255, 255, 255, 0.3);
+  }
+
+  .friend-list ul li span.name {
+    position: relative;
+    width: 100%;
+    left: 0;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .friend-list ul li.active span.name {
+    top: -7px;
+  }
+
+  .friend-list ul li span.name span.status {
+    display: block;
+    text-transform: none;
+    font-weight: 300;
+    font-size: 8px;
+    color: rgb(255, 255, 255);
+  }
+
+  .friend-list ul li.active span.name span.status {
+    font-size: 9px;
+  }
+
+  .friend-list ul li:nth-child(2n+1) span.messages span.count {
+    position: absolute;
+    font-size: 10px;
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    background: #f42052;
+    z-index: 10;
+    line-height: 17px;
+    border-radius: 100%;
+    margin-top: -2px;
+    right: 0;
+    margin-right: 10px;
+    color: #fff;
+  }
+
+  .friend-list ul li:nth-child(2n+2) span.messages span.count {
+    position: absolute;
+    z-index: 10;
+    font-size: 10px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background: #f42052;
+    line-height: 20px;
+    border-radius: 100%;
+    margin-top: -10px;
+    right: 0;
+    margin-right: 7px;
+    color: #fff;
+  }
+
+  .friend-list ul li.active span.messages,
+  .friend-list ul li span.messages.hide {
+    display: none;
+  }
+
+  div.chat-messages {
+    position: relative;
+    margin-top: 15px;
+    z-index: 10;
+  }
+
+  div.chat-messages div.chat {
+    position: relative;
+    width: 260px;
+    height: 320px;
+    background: #fcfcfe;
+    background-image: url("chatpage/chatappbackground8.png");
+    background-repeat: no-repeat;
+object-fit: cover;
+background-size: cover;
+   
+    left: 50%;
+    margin-left: -150px;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    overflow-y: scroll;
+    overflow-anchor: bottom;
+box-shadow: 30px 0 0 -15px rgb(44, 44, 111),
+      60px 0 0 -30px black,
+      -30px 0 0 -15px rgb(44, 44, 111),
+      -60px 0 0 -30px black,
+      0 0 25px rgba(0, 0, 0, 0.5);
+
+      }
+
+
+        div.chat-messages div.chat::-webkit-scrollbar{
+  display: none;
+}
+
+  div.chat div.chat-content>span {
+    margin-bottom: 12px;
+  }
+
+  div.chat div.chat-content span.friend {
+    position: relative;
+    width: 70%;
+    height: auto;
+    display: inline-block;
+    background: #fff;
+
+    padding: 10px;
+    padding-bottom: 25px;
+    box-shadow: 2px 2px 20px -2px rgba(60, 51, 176, 0.2);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+  }
+
+  div.chat div.chat-content span.friend.first {
+    border-radius: 15px 15px 15px 2px;
+    /* color: rgba(60,51,176,1); */
+    background: #57db87;
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+
+
+  }
+
+  div.chat div.chat-content span.friend.last {
+    /* color: #f42052; */
+    /* background: #5850c0; */
+    background: #57db87;
+    background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+
+    border-radius: 2px 15px 15px 15px;
+  }
+
+  div.chat div.chat-content span.friend span.time {
+    position: absolute;
+    display: block;
+    right: 0;
+    margin-top: 5px;
+    margin-right: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+  }
+
+  div.chat div.chat-content span.you {
+    position: relative;
+    float: right;
+    width: 70%;
+    height: auto;
+    background: #5850c0;
+    display: inline-block;
+    padding: 10px;
+    padding-bottom: 25px;
+    color: #fff;
+    color: #000000;
+    font-size: small;
+background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
+    box-shadow: 2px 2px 20px rgba(60, 51, 176, 0.2),
+      inset -10px -10px 55px rgba(255, 255, 255, 0.1);
+  }
+
+  div.chat div.chat-content span.you span.time {
+    position: absolute;
+    display: block;
+    right: 0;
+    margin-top: 5px;
+    margin-right: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  div.chat div.chat-content span.you.first {
+    border-radius: 15px 15px 2px 15px;
+  }
+
+  div.chat div.chat-content span.you.last {
+    border-radius: 15px 2px 15px 15px;
+  }
+
+  div.msg-box {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid rgba(60, 51, 176, 0.1);
+    overflow: hidden;
+  }
+
+  .ip-msg {
+    width: 67%;
+    position: relative;
+    margin-top: 620px;
+    font-size: 14px;
+    padding: 15px;
+    padding-right: 3%;
+    color: rgba(0, 0, 0, 0.9);
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+    border: 2 px solid black;
+    margin-left: 5px;
+    /* background: rgba(252, 251, 251, 0.03); */
+    background-color: #fcfcfe;
+    border-radius: 10%;
+    
+background-color: #60dfcd;
+background-image: linear-gradient(315deg, #60dfcd 0%, #1e9afe 74%);
+
+
+
+
+  }
+
+  .ip-msg::placeholder {
+    color: rgb(0, 0, 0);
+    font-weight: bolder;
+  }
+
+  div.msg-box span.btn-group {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 14px;
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  div.msg-box span.btn-group i {
+    color: rgba(60, 51, 176, 1);
+    font-size: 18px;
+    padding: 0 7px;
+  }
+
+  div.footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 10;
+    background: #271c5d;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: inset 0 15px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  div.footer ul li {
+    list-style: none;
+    float: left;
+    width: 20%;
+    display: inline-block;
+    padding: 18px 0;
+    font-size: 18px;
+    text-align: center;
+    color: #8b86ed;
+  }
+
+  div.footer ul li.active {
+    color: #fff;
+    box-shadow: inset 0 -6px 0 rgba(139, 134, 237, 0.8),
+      inset 0 -25px 25px -10px rgba(139, 134, 237, 0.2);
+  }
+
+
+
+
+
+
+
+
+  .yt {
+    position: fixed;
+    padding: 7px 10px 3px 10px;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 7px;
+  }
+
+  .yt:hover {
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  .edithr {
+    margin-top: 3%;
+    margin-bottom: 4%;
+  }
+
+  #sendbutton {
+    position: relative;
+    width: 10%;
+    font-size: 14px;
+    padding: 15px;
+    /* background: rgba(252, 251, 251, 0.03); */
+    background: none;
+    border-radius: 10%;
+    background-color: #182b3a;
+background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
+
+
+  }
+
+  #swipe {
+    border-radius: 15%;
+    color: white;
+    padding: 4%;
+    font-size: xx-small;
+background-color: #182b3a;
+background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
+background-color: #2234ae;
+background-image: linear-gradient(315deg, #2234ae 0%, #191714 74%);
+
+
+  }
+  #showswipe{
+    width:77%;
+    height:15px;
+    background:black;
+    color:white;
+    border-radius: 0%;
+    font-size: smaller;
+    padding: 5px;
+    padding-left: 15px;
+    display:none;
+    margin-left: 7px;
+    margin-top: -5%;
+background-color: #2234ae;
+background-image: linear-gradient(315deg, #2234ae 0%, #191714 74%);
+   
+background-color: #7a7adb;
+background-image: linear-gradient(315deg, #7a7adb 0%, #170e13 74%);
+
+     
+    
+
+
+  }
+  #closeswipe{
+    visibility: hidden;
+  position: relative;margin-left:80%;margin-top:-30%;color:white;
+  }
+  #showtyping{
+    visibility: hidden;
+  }
+  .typingIndicatorContainer {
+display: flex;
+flex: none;
+align-items: flex-end;
+margin: spacing4 0;
+}
+
+.typingIndicatorBubble {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 52px;
+height: 5px;
+margin: 0px 12px;
+margin-bottom: -12px;
+border-radius: 12px;
+background: none;  
+}
+
+.typingIndicatorBubbleDot {
+
+width: 4px;
+height: 4px;
+margin-right: 4px;
+background-color: aqua;
+border-radius: 50%;
+animation-name: bounce;
+animation-duration: 1.3s;
+animation-timing-function: linear;
+animation-iteration-count: infinite;
+}
+
+.typingIndicatorBubbleDot:first-of-type {
+margin: 0px 4px;
+}
+
+.typingIndicatorBubbleDot:nth-of-type(2) {
+animation-delay: 0.15s;
+}
+
+.typingIndicatorBubbleDot:nth-of-type(3) {
+animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+0%,
+60%,
+100% {
+  transform: translateY(0);
+}
+30% {
+  transform: translateY(-4px);
+}
+}
+
+  .redtogreen{
+    width:15px;height:2px;border-radius:50%;
+    background-image: url("chatpage/redtick.png");
+          background-repeat: no-repeat;
+          object-fit: contain;
+          background-size: 100% 100%;
+
+  }
+
+
+
+  .slider {
+
+background: #d3d3d3; /* Grey background */
+outline: none; /* Remove outline */
+opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+
+background-color: #000000; /* Green background */
+cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+/* Slider handle height */
+background-color: #000000; /* Green background */
+cursor: pointer; /* Cursor on hover */
+}
+
+
+
+
+#range1 {
+-webkit-appearance: none;
+appearance: none; 
+width: 60%;
+cursor: pointer;
+outline: none;
+overflow-x: hidden;
+border-radius: 16px;
+}
+
+#range1::-webkit-slider-runnable-track {
+height: 10px;
+background: #000000;
+border-radius: 10px;
+}
+
+#range1::-moz-range-track {
+height: 5px;
+background: #ccc;
+border-radius: 16px;
+}
+
+#range1::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none; 
+height: 10px;
+width: 10px;
+background-color: #000000;
+border-radius: 50%;
+border: 2px solid rgb(255, 255, 255);
+box-shadow: -407px 0 0 400px #f50;
+}
+
+#range1::-moz-range-thumb {
+height: 10px;
+width: 10px;
+background-color: #fff;
+border-radius: 50%;
+border: 1px solid #f50;
+box-shadow: -407px 0 0 400px #f50;
+}
+
+
+#musicplayer{
+background-image: url(demopage/appback1.png);
+          background-repeat: no-repeat;
+          object-fit: contain;
+          background-size: 98% 100%;
+         
+margin-left:5%;
+height:105px;margin-top:-5%;
+width:60%;
+border-radius:10%;
+     
+}
+
+#musicplayernew{
+background-image: url(demopage/appback2.png);
+          background-repeat: no-repeat;
+          object-fit: contain;
+          background-size: 98% 100%;
+         
+margin-left:5%;
+height:105px;margin-top:-5%;
+width:60%;
+border-radius:10%;
+border: 0.35rem solid;
+
+border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+animation: borderRotate var(--d) linear infinite forwards;
+     
+}
+.musicplayernew{
+background-image: url(demopage/appback2.png);
+          background-repeat: no-repeat;
+          object-fit: contain;
+          background-size: 98% 100%;
+         
+margin-left:5%;
+height:105px;margin-top:-5%;
+width:60%;
+border-radius:10%;
+border: 0.35rem solid;
+
+border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+animation: borderRotate var(--d) linear infinite forwards;
+     
+}
+
+#musicshow{
+margin-top:5%;
+height:22%;
+margin-left:-20%;
+width:65%;
+border-radius:10%;
+margin-right:-20%;
+padding: 5px;
+padding-right: 45px;
+color: white;
+font-weight: bolder;
+}
+.musicupload{
+width:6%;margin-right:-8%;color: aqua;
+}
+
+.musiccontrol{
+width: 90%;height:30px;margin-top:5%;
+}
+#swipehr{
+visibility: hidden;
+}
+
+
+.center {
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+background: #000;
+}
+.wave {
+width: 5px;
+height: 100px;
+background: linear-gradient(45deg, cyan, #fff);
+margin: 10px;
+animation: wave 1s linear infinite;
+border-radius: 20px;
+}
+.wave:nth-child(2) {
+animation-delay: 0.1s;
+}
+.wave:nth-child(3) {
+animation-delay: 0.2s;
+}
+.wave:nth-child(4) {
+animation-delay: 0.3s;
+}
+.wave:nth-child(5) {
+animation-delay: 0.4s;
+}
+.wave:nth-child(6) {
+animation-delay: 0.5s;
+}
+.wave:nth-child(7) {
+animation-delay: 0.6s;
+}
+.wave:nth-child(8) {
+animation-delay: 0.7s;
+}
+.wave:nth-child(9) {
+animation-delay: 0.8s;
+}
+.wave:nth-child(10) {
+animation-delay: 0.9s;
+}
+
+@keyframes wave {
+0% {
+  transform: scale(0);
+}
+50% {
+  transform: scale(1);
+}
+100% {
+  transform: scale(0);
+}
+}
+
+
+   audio::-webkit-media-controls-panel {
+   background-image: url(demopage/appback7.png);
+          background-repeat: no-repeat;
+          object-fit: contain;
+          background-size: 100% 140%;
+
+
+   color: #eee4e4;
+   }
+
+
+   .seen{
+
+    width:15px;height:2px;border-radius:50%;
+    background-color: #000000;
+    background-image: url("chatpage/greentick6.png");
+          background-repeat: no-repeat;
+          object-fit: contain;
+          background-size: 100% 100%;
+
+     -webkit-animation-duration: 5s;
+                      animation-duration: 5s;
+                      -webkit-animation-fill-mode: both;
+                      animation-fill-mode: both;
+                  
+
+
+          animation-name: fadeInOut;
+  
+         }
+          @keyframes fadeInOut {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+         
+         .tick{
+    width:15px;height:2px;border-radius:50%;
+    float: left;
+    margin-left: -180px;
+    margin-top: -10%;
+    width: 20px;
+    height: 20px;
+     background-image: url("chatpage/swipeicon.png");
+          background-repeat: no-repeat;
+          object-fit: contain;
+          background-size: 100% 100%;
+
+   }
+   .tickothers{
+                        width:20px;height:20px;border-radius:50%;background:aqua;
+background-image: url("chatpage/swipeicon.png");
+          background-repeat: no-repeat;
+          object-fit: contain;
+          background-size: 100% 100%;
+          float:right;
+          margin-right: -30px;
+        transform: rotateX(180deg);
+        transform: rotateY(180deg);
+   }
+@property --angle {
+syntax: '<angle>';
+initial-value: 90deg;
+inherits: true;
+}
+
+@property --gradX {
+syntax: '<percentage>';
+initial-value: 50%;
+inherits: true;
+}
+
+@property --gradY {
+syntax: '<percentage>';
+initial-value: 0%;
+inherits: true;
+}
+
+
+:root {
+--d: 2500ms;
+--angle: 90deg;
+--gradX: 100%;
+--gradY: 50%;
+--c1: rgba(168, 239, 255, 1);
+--c2: rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+@keyframes borderRotate {
+100% {
+  --angle: 420deg;
+}
+}
+
+@keyframes borderRadial {
+20% {
+  --gradX: 100%;
+  --gradY: 50%;
+}
+40% {
+  --gradX: 100%;
+  --gradY: 100%;
+}
+60% {
+  --gradX: 50%;
+  --gradY: 100%;
+}
+80% {
+  --gradX: 0%;
+  --gradY: 50%;
+}
+100% {
+  --gradX: 50%;
+  --gradY: 0%;
+}
+
+}
