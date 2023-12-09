@@ -35,7 +35,7 @@
     width: 380px;
     height: 700px;
     background: #5850c0;
-    background-image: url("chatpage/chatappbackground8.png");
+    background-image: url("../chatpage/chatappbackground8.png");
     background-repeat: no-repeat;
 object-fit: cover;
 background-size: cover;
@@ -295,7 +295,7 @@ background-size: cover;
     width: 260px;
     height: 320px;
     background: #fcfcfe;
-    background-image: url("chatpage/chatappbackground8.png");
+    background-image: url("../chatpage/chatappbackground8.png");
     background-repeat: no-repeat;
 object-fit: cover;
 background-size: cover;
@@ -621,7 +621,7 @@ animation-delay: 0.3s;
 
   .redtogreen{
     width:15px;height:2px;border-radius:50%;
-    background-image: url("chatpage/redtick.png");
+    background-image: url("../chatpage/redtick.png");
           background-repeat: no-repeat;
           object-fit: contain;
           background-size: 100% 100%;
@@ -704,7 +704,7 @@ box-shadow: -407px 0 0 400px #f50;
 
 
 #musicplayer{
-background-image: url(demopage/appback1.png);
+background-image: url(../demopage/appback1.png);
           background-repeat: no-repeat;
           object-fit: contain;
           background-size: 98% 100%;
@@ -717,7 +717,7 @@ border-radius:10%;
 }
 
 #musicplayernew{
-background-image: url(demopage/appback2.png);
+background-image: url(../demopage/appback2.png);
           background-repeat: no-repeat;
           object-fit: contain;
           background-size: 98% 100%;
@@ -733,7 +733,7 @@ animation: borderRotate var(--d) linear infinite forwards;
      
 }
 .musicplayernew{
-background-image: url(demopage/appback2.png);
+background-image: url(../demopage/appback2.png);
           background-repeat: no-repeat;
           object-fit: contain;
           background-size: 98% 100%;
@@ -830,7 +830,7 @@ animation-delay: 0.9s;
 
 
    audio::-webkit-media-controls-panel {
-   background-image: url(demopage/appback7.png);
+   background-image: url(../demopage/appback7.png);
           background-repeat: no-repeat;
           object-fit: contain;
           background-size: 100% 140%;
@@ -844,7 +844,7 @@ animation-delay: 0.9s;
 
     width:15px;height:2px;border-radius:50%;
     background-color: #000000;
-    background-image: url("chatpage/greentick6.png");
+    background-image: url("../chatpage/greentick6.png");
           background-repeat: no-repeat;
           object-fit: contain;
           background-size: 100% 100%;
@@ -872,7 +872,7 @@ animation-delay: 0.9s;
     margin-top: -10%;
     width: 20px;
     height: 20px;
-     background-image: url("chatpage/swipeicon.png");
+     background-image: url("../chatpage/swipeicon.png");
           background-repeat: no-repeat;
           object-fit: contain;
           background-size: 100% 100%;
@@ -880,7 +880,7 @@ animation-delay: 0.9s;
    }
    .tickothers{
                         width:20px;height:20px;border-radius:50%;background:aqua;
-background-image: url("chatpage/swipeicon.png");
+background-image: url("../chatpage/swipeicon.png");
           background-repeat: no-repeat;
           object-fit: contain;
           background-size: 100% 100%;
