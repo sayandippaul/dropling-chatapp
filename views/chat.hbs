@@ -707,13 +707,23 @@ showfinalmessages(data.data,data.unseenforthisuser)
   //if(data)
 }
 else{
-  Notification.requestPermission().then((perm) => {
+  {{!-- Notification.requestPermission().then((perm) => {
           if (perm === "granted") {
             new Notification("New Message", {
               body: data.lastmessage.ownname+`: `+data.lastmessage.chatbody,
             });
           }
-        });
+        }); --}}
+
+        navigator.serviceWorker.register('js/sw.js');
+Notification.requestPermission(function(result) {
+  if (result == 'granted') {
+   navigator.serviceWorker.ready.then( function( registration )
+            {
+                registration.showNotification( "New Message", { body:data.lastmessage.ownname+`: `+data.lastmessage.chatbody } );
+            } );
+
+  }
 
 
 }
