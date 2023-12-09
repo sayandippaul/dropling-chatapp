@@ -969,7 +969,7 @@ background-image: url("chatpage/swipeicon.png");
     <div class="app">
 
       <div class="head clearfix">
-        <span class="title"> BRUHCHAT</span>
+        <span class="title"> Dropling</span>
         <span onclick="gotocontact()" class="messages-notification">
           <i class="fa fa-comments-o"></i>
           {{!-- <span class="count">2</span> --}}
@@ -1194,8 +1194,9 @@ var url="https://dropling.onrender.com";
 {{!-- var url="http://localhost:3000"; --}}
   
 
-if(localStorage.getItem("toid")=="null"){
+if(localStorage.getItem("toid")=="null" || localStorage.getItem("toid")=="undefined" || localStorage.getItem("toid")==null|| localStorage.getItem("toid")==undefined){
     window.location.replace("contact");
+  
   
 }
 
