@@ -16,7 +16,7 @@ body {
 #frame {
     width: 95%;
     height: 90vh;
-    max-width: 600px;
+    max-width: 400px;
     max-height: 900px;
     background: #E6EAEA;
   }
@@ -494,7 +494,7 @@ body {
       float:right;
       margin-right:1%;
       margin-top:-9%;
-       color:greenyellow;
+       color:white;
        text-align: center;
       }
       .unseenno{

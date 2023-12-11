@@ -24,7 +24,8 @@ const app=express();
   });
   
 
-  var todetails = new mongoose.Schema({
+  var todetails = new mongoose.Schema(
+    {
     toid: {
       required: false,
       type: Number,
@@ -47,8 +48,17 @@ const app=express();
       required: false,
       type: [msgdesc],
     },
+
+  },
+  {
+    timestamps: true
+
+  }
     
-  });
+  
+
+    
+  );
   
 const users=new mongoose.Schema({
     userid:{

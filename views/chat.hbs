@@ -239,6 +239,7 @@
 </html>
 <script>
 var url="https://dropling.onrender.com";
+{{!-- var url="http://localhost:3000"; --}}
 
 
  jQuery(function($) { // DOM ready and $ alias secured
@@ -251,7 +252,6 @@ var url="https://dropling.onrender.com";
 
 });
 
-{{!-- var url="http://localhost:3000"; --}}
   
 
 if(localStorage.getItem("toid")=="null" || localStorage.getItem("toid")=="undefined" || localStorage.getItem("toid")==null|| localStorage.getItem("toid")==undefined){
@@ -339,8 +339,12 @@ var unseen=getunseenno();
 
 
 
-      var today = new Date();
-      var time = today.getHours() + ":" + today.getMinutes();
+      {{!-- var today = new Date(); --}}
+      {{!-- var time = today.getHours() + ":" + today.getMinutes(); --}}
+      var date = new Date();
+	var current_date = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+ date.getDate();
+	var current_time = date.getHours()+":"+date.getMinutes();
+	var time = current_date+" "+current_time;	
       var ds = { time: time, toid: localStorage.getItem("toid"), chatbody: chat_deliver, ownid: localStorage.getItem("userid"), toname: localStorage.getItem("tousername"), ownname: localStorage.getItem("username"), swipe: swipevalue };
       //console.log(ds);
 var data=ds;
