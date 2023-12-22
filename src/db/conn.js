@@ -1,7 +1,7 @@
 const mongoose=require("mongoose");
 var mongostringglobal="mongodb+srv://sayandip:sayandip2003@dropling.beoaja8.mongodb.net/dropling?retryWrites=true&w=majority";
 var mongostringlocal="mongodb://0.0.0.0:27017/bruhchat";
-mongoose.connect(mongostringlocal,
+mongoose.connect(mongostringglobal,
 
 {
     // useNewUrlParser:true,
