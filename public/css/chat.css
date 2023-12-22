@@ -32,14 +32,15 @@
 
   div.app {
     position: absolute;
-    width: 380px;
-    height: 700px;
+    width:100%;
+    margin:0;
+    height: 730px;
     background: #5850c0;
     background-image: url("../chatpage/chatappbackground8.png");
     background-repeat: no-repeat;
 object-fit: cover;
 background-size: cover;
-    margin-top: 30px;
+    margin-top: 5px;
   }
 
   div.app:before {
@@ -293,7 +294,7 @@ background-size: cover;
   div.chat-messages div.chat {
     position: relative;
     width: 260px;
-    height: 320px;
+    height: 340px;
     background: #fcfcfe;
     background-image: url("../chatpage/chatappbackground8.png");
     background-repeat: no-repeat;
