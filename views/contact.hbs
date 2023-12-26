@@ -590,6 +590,7 @@ for(var i=0;i<alluser[0].totaltoid.length;i++){
       
 }
 showcontacts();
+
 function gotouser(toid,name){
 
     localStorage.setItem("tousername",name);
@@ -948,7 +949,7 @@ socket.on("showtypingend",function(data){
 
 
 })
-
+showcontacts();
 </script>
 </body></html>
 {{!-- 
