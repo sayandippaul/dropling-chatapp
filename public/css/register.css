@@ -167,3 +167,11 @@ i span{
   border-radius: 50%;
   border: 2px solid white;
 }
+@media only screen and (max-device-width: 600px) {
+  #frame{
+      
+      zoom:2.0;
+      /* margin-top: -20px;
+      margin-left: -20px; */
+  }
+}
