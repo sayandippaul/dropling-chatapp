@@ -106,13 +106,16 @@
 
   let otp = Math.floor((Math.random() * 10000) + 1); 
    sendmail(name,email,otp);
-   let otpgivenbyuser = prompt("Please enter  otp sent to mail", "0000");
+   var otpgivenbyuser = prompt("Please enter  otp sent to mail", "0000");
    var passwordentered=false;
    {{!-- let otpgivenbyuser=document.getElementById("").value; --}}
-   if(otp==otpgivenbyuser && passwordentered==false ){
+   while(passwordentered==false){
 
    
-passwordentered=true;
+   if(otp==otpgivenbyuser  ){
+
+   
+      passwordentered=true;
 
                var ds = { name:name,pass:pass,email:email,dp:dp };
       console.log(ds);
@@ -154,8 +157,10 @@ passwordentered=true;
       .catch((err) => console.log(err));
 
    }
-   else{
+   else if(otp==otpgivenbyuser &&  passwordentered){
       alert("wrong otp entered");
+
+   }
    }
     
 }
