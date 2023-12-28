@@ -40,6 +40,8 @@
 
                   </div>
                      </div>
+
+                     
 						
                <div class="field space">
                   <input  type="submit" value="REGISTER">
@@ -77,36 +79,8 @@
           }
          });
 
-
-         function sendmail(name,email,otp) {
-               var user = { name:name,email:email,otp:otp };
-
-      fetch(url+"/sendmailreg", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify(user),
-      })
-        .then((res) => res.json())
-        .then((data) => { })
-        .catch((err) => console.log(err));
-    }
-   
-         function submitd(){
-            event.preventDefault();
-            var name=document.getElementById("name").value;
-            var email=document.getElementById("email").value;
-            var pass=document.getElementById("pass").value;
-
-
-  let otp = Math.floor((Math.random() * 10000) + 1); 
-   sendmail(name,email,otp);
-   let otpgivenbyuser = prompt("Please enter  otp sent to mail", "0000");
+function showotpfield(name,pass,email,dp,otp){
+let otpgivenbyuser = prompt("Please enter  otp sent to mail", "XXXX");
    {{!-- let otpgivenbyuser=document.getElementById("").value; --}}
    if(otp==otpgivenbyuser){
 
@@ -153,10 +127,47 @@
       .catch((err) => console.log(err));
 
    }
-   else{
-      alert("wrong otp entered");
+   else {
+      if(otpgivenbyuser!=null){
+
+   showotpfield(name,pass,email,dp,otp); 
+      }
+      else{
+         alert("Wrong Otp Entered");
+               }
+      
    }
-    
+   
+}
+         function sendmail(name,email,otp) {
+               var user = { name:name,email:email,otp:otp };
+
+      fetch(url+"/sendmailreg", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(user),
+      })
+        .then((res) => res.json())
+        .then((data) => { })
+        .catch((err) => console.log(err));
+    }
+   
+         function submitd(){
+            event.preventDefault();
+            var name=document.getElementById("name").value;
+            var email=document.getElementById("email").value;
+            var pass=document.getElementById("pass").value;
+
+
+  let otp = Math.floor((Math.random() * 10000) + 1); 
+   sendmail(name,email,otp);
+   showotpfield(name,pass,email,dp,otp); 
 }
 
  function isloggedin(){
