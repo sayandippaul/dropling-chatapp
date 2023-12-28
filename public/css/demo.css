@@ -1,0 +1,485 @@
+body{
+    background: black;
+    margin: auto;
+    margin-top:5% ;
+    max-width: 350px;
+      }
+#navbar{
+    /* background-color: rgb(255, 0, 0); */
+    height: 8vh;
+    width: 98%;
+
+}
+.left{
+    /* background-color: aqua; */
+
+}
+.right{
+    /* background-color: rgb(229, 229, 229); */
+    height: 80vh;
+
+}
+#showmap{
+    /* background-color: greenyellow; */
+    height: 75%;
+
+    /* background: url(../"chatpage/chatappbackground2.png"); */
+
+}
+#chatbot{position: absolute;
+    /* background-color: rgb(21, 0, 255); */
+    height: 100px;
+    width: 100px;
+    margin-top: 50px;margin-left: 40px;
+    border-radius:100% ;
+
+}
+#showimg{
+    /* animation: fadeIn 0.1s; */
+    border-radius: 2%;
+    margin-top: 5%;
+
+    
+
+}
+#snow{
+
+}
+#mainbody{
+    display: grid;
+    grid-template-columns: 60% 38%;
+    grid-gap: 5px;
+    height: 90vh;
+    /* border: 5px solid green; */
+    background-image: url("../demopage/appback6.png");
+    background-repeat: no-repeat;
+object-fit: contain;
+background-size: 98% 100%;
+
+
+}
+.imgnow{
+    width: 90%;
+    margin-left:5%;
+    margin-top:15%;
+    margin-bottom:0%;
+    height: 60vh;
+    border: 0.35rem solid;
+
+    border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
+animation: borderRotate var(--d) linear infinite forwards;
+}
+.mapnow{
+    width: 90%;
+    margin-left:5%;
+    margin-top:-20%;
+    margin-bottom:25%;
+    height: 60vh;
+    
+}
+#showmapnow{
+    /* border: 5px solid red; */
+    border-radius: 2%;
+    margin-top: 10%;
+    width: 90%;
+    margin-top:30%;
+    display: grid;
+    grid-template-columns: auto auto auto ;
+    grid-gap: 10px;
+    margin-bottom:15%;
+    height: 60vh;
+    /* background-image: url(../"demopage/showmapbackground1.png"); */
+    background-repeat: no-repeat;
+object-fit: contain;
+background-size: 98% 100%;
+color: aliceblue;
+padding-top: 20px;
+padding-bottom: 20px;
+padding-left: 10px;
+padding-right: 10px;
+overflow: scroll;
+
+border: 0.35rem solid;
+
+border-image: radial-gradient(ellipse at var(--gradX) var(--gradY), var(--c1), var(--c1) 10%, var(--c2) 40%) 30;
+animation: borderRadial var(--d) linear infinite forwards;
+
+}
+#showmapnow::-webkit-scrollbar{
+display: none;
+}
+
+#showchat{
+    position: relative;
+    height: 90px;
+    width: 200px;
+    margin-left: 33%;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 100% 100% 30% 100%;
+    padding: 21px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 12px;
+    background-image: url(../demopage/chatbubble2.png);
+    background-repeat: no-repeat;
+    object-fit: contain;
+    background-size: 98% 100%;
+    -webkit-animation-duration: 5s;
+                animation-duration: 5s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            
+
+
+    animation-name: fadeInLeft;
+
+}#showchat1{
+    position: relative;
+    height: 90px;
+    width: 200px;
+    margin-left: 33%;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 100% 100% 30% 100%;
+    padding: 21px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 12px;
+    background-image: url(../demopage/chatbubble2.png);
+    background-repeat: no-repeat;
+    object-fit: contain;
+    background-size: 98% 100%;
+    -webkit-animation-duration: 5s;
+                animation-duration: 5s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            
+
+
+    animation-name: fadeInLeft;
+
+}
+
+.showchatnew{
+    position: relative;
+    height: 90px;
+    width: 200px;
+    margin-left: 33%;
+    color: aliceblue;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 100% 100% 30% 100%;
+    padding: 21px;
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 12px;
+    background-image: url(../demopage/chatbubble2.png);
+    background-repeat: no-repeat;
+    object-fit: contain;
+    background-size: 98% 100%;
+    -webkit-animation-duration: 1.5s;
+                animation-duration: 1.5s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            
+
+
+    animation-name: fadeInLeft;
+
+  }
+
+
+
+
+
+  @media only screen and (max-device-width: 600px) {
+
+#mainbody{
+/* height: 800px; */
+/* margin-top: 30px; */
+/* width: 100%; */
+/* width: 130%; */
+/* zoom:2.0; */
+/* margin-top: -20px;
+margin-left: -20px; */
+/* max-height: 60px; */
+/* display: none; */
+/* width: 50vh; */
+/* zoom: 0.5; */
+
+/* max-height: 700px; */
+}
+}
+
+
+@keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+
+ 
+ @keyframes fadeInLeft {
+    0% {
+       opacity: 0;
+       transform: translateX(-70px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ }
+ 
+ .fadeInLeft {
+ -webkit-animation-name: fadeInLeft;
+ animation-name: fadeInLeft;
+} 
+
+
+
+ 
+ @keyframes fadeInTop {
+    0% {
+       opacity: 0;
+       transform: translateY(-50px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateY(0);
+    }
+ }
+ 
+ .fadeInTop {
+ -webkit-animation-name: fadeInTop;
+ animation-name: fadeInTop;
+} 
+
+@keyframes fadeInHrleft {
+    0% {
+       opacity: 0;
+       transform: translateX(30px);
+    }
+    100% {
+       opacity: 1;
+       transform: translateX(0);
+    }
+ }
+ 
+ .fadeInTop {
+ -webkit-animation-name: fadeInHrleft;
+ animation-name: fadeInHrleft;
+} 
+
+
+#model{
+width: 80%;
+height: 80%;
+border-radius: 100%;
+}
+.divleft{
+border-radius: 100%;
+padding: -10px;
+width:25px;height: 25px;
+}
+.divmid{
+
+height: auto;
+width: auto;
+border-radius: 100%;
+padding: 10px;
+width:25px;height: 25px;
+
+}
+.divright{
+
+height: auto;
+width: auto;
+border-radius: 100%;
+padding: 10px;
+width:25px;height: 25px;
+
+}
+.hrleft{
+width:90%;
+background-color: aliceblue;
+margin: 0%;
+margin-left:45% ;
+margin-top: -80%;
+}.hrmid{
+width: auto;
+background-color: aliceblue;
+transform: rotate(90deg);
+margin: 0%;
+margin-left:0% ;
+}.hrright{
+width: 100%;
+background-color: aliceblue;
+margin: 0%;
+margin-left:-50% ;
+margin-top: -80%;
+}
+.hrleftnew{
+width:90%;
+background-color: aqua;
+margin: 0%;
+margin-left:45% ;
+margin-top: -80%;
+-webkit-animation-duration: 3s;
+                animation-duration: 3s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            
+
+
+    animation-name: fadeInHrleft;
+
+}
+.hrrightnew{
+width: 100%;
+background-color: aqua;
+margin: 0%;
+margin-left:-50% ;
+margin-top: -80%;
+}
+#nav{
+background-image: url("../demopage/navback.png");
+    background-repeat: no-repeat;
+object-fit: contain;
+background-size: 98% 100%;
+
+}
+.iconimageleft{
+width: 10px;
+height: 10px;
+margin-left:1px;
+border-radius: 100%;
+
+}
+.iconimagemid{
+width: 20px;
+height: 20px;
+margin-left: 5px;
+border-radius: 100%;
+
+}
+.iconimageright{
+width: 10px;
+height: 10px;
+margin-left: 2px;
+margin-top: -18px;
+border-radius: 100%;
+
+}
+.divmid1{
+background-image: url(../demopage/midshow1.png);
+    background-repeat: no-repeat;
+object-fit: contain;
+background-size: 101% 100%;
+
+}
+.divmidlast{
+background-image: url(../demopage/lastshow1.png);
+    background-repeat: no-repeat;
+object-fit: contain;
+background-size: 100% 100%;
+border-radius: 100%;
+
+}.divmidlastnotactive{
+background-image: url(../demopage/lastshow2.png);
+    background-repeat: no-repeat;
+object-fit: contain;
+background-size: 100% 100%;
+
+}.divmidothers{
+background-image: url(../demopage/startshow.png);
+    background-repeat: no-repeat;
+object-fit: contain;
+background-size: 102% 105%;
+-webkit-animation-duration: 10s;
+                animation-duration: 2s;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+            
+
+
+    animation-name: fadeInTop;
+
+
+}.divmidothersnotactive{
+background-image: url(../demopage/startshow1.png);
+    background-repeat: no-repeat;
+object-fit: contain;
+background-size: 102% 105%;
+
+}
+.snowflake {
+position: absolute;
+width: 10px;
+height: 10px;
+background: linear-gradient(white, white); /* Workaround for Chromium's selective color inversion */
+border-radius: 50%;
+filter: drop-shadow(0 0 10px white);
+}
+
+
+@property --angle {
+syntax: '<angle>';
+initial-value: 90deg;
+inherits: true;
+}
+
+@property --gradX {
+syntax: '<percentage>';
+initial-value: 50%;
+inherits: true;
+}
+
+@property --gradY {
+syntax: '<percentage>';
+initial-value: 0%;
+inherits: true;
+}
+
+
+:root {
+--d: 2500ms;
+--angle: 90deg;
+--gradX: 100%;
+--gradY: 50%;
+--c1: rgba(168, 239, 255, 1);
+--c2: rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+@keyframes borderRotate {
+100% {
+--angle: 420deg;
+}
+}
+
+@keyframes borderRadial {
+20% {
+--gradX: 100%;
+--gradY: 50%;
+}
+40% {
+--gradX: 100%;
+--gradY: 100%;
+}
+60% {
+--gradX: 50%;
+--gradY: 100%;
+}
+80% {
+--gradX: 0%;
+--gradY: 50%;
+}
+100% {
+--gradX: 50%;
+--gradY: 0%;
+}
+}
