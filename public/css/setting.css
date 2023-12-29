@@ -1,0 +1,134 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 16%;
+  height: 100%;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 60%;
+  width: 25%;
+  left: 4px;
+  bottom: 4px;
+  background-color: rgb(245, 245, 245);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #248df6;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+      body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: black;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  margin: 10% auto;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: #32465a;
+  color: #fff;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  padding: 8px 15px;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 20px;
+  text-align: center;
+  flex-grow: 0.8;
+}
+
+.settings-content {
+  background-color: #32465a;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.settings-content p {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settings-content p input[type="radio"] {
+  order: 1;
+}
+
+.settings-content p span {
+  margin-right: 10px;
+}
+#logout {
+  background-color: rgb(243, 6, 6);
+  color: #ffffff;
+  height: 180%;
+  width: 30%;
+  border-radius: 20%;
+}
+
+ 

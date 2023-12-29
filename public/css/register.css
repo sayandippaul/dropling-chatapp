@@ -159,11 +159,14 @@ i span{
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   width: 80%;margin:10%;
+  height: 40px;
 }
 
 .image img {
-  width: 80%;
-  height: 90%;
+  /* width: 80%; */
+  height: 60px;
+  width: 60px;
+  /* max-height: 30px; */
   border-radius: 50%;
   border: 2px solid white;
 }
