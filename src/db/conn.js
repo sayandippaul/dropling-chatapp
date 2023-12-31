@@ -1,6 +1,7 @@
+require("dotenv").config();
+
 const mongoose=require("mongoose");
-var mongostringglobal="mongodb+srv://sayandip:sayandip2003@dropling.beoaja8.mongodb.net/dropling?retryWrites=true&w=majority";
-var mongostringlocal="mongodb://0.0.0.0:27017/bruhchat";
+var mongostringglobal=process.env.databasestring;
 mongoose.connect(mongostringglobal,
 
 {

@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
@@ -6,6 +8,7 @@ const port = process.env.PORT || 5000
 const http = require("http").Server(app);
 
 require("./db/conn");
+
 var nowuser="null";
 var online=0;
 // console.log("hi"+http);
@@ -1156,14 +1159,14 @@ app.post("/sendmailreg", bodyParser.json(),async (req, res) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "sayandip31072003@gmail.com",
-      pass: "ovcvjfosjxcyenyh",
+      user: process.env.gmail,
+      pass: process.env.password,
     },
   });
   // document.getElementById("show").innerHTML=showbatch;
   let x=req.body.otp;
   var mailOptions = {
-    from: "sayandip31072003@gmail.com",
+    from: process.env.gmail,
     to: req.body.email,
     subject: "Subject",
 
@@ -1238,13 +1241,13 @@ mailbody=`<div>
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "sayandip31072003@gmail.com",
-      pass: "ovcvjfosjxcyenyh",
+      user: process.env.gmail,
+      pass: process.env.password,
     },
   });
   // document.getElementById("show").innerHTML=showbatch;
   var mailOptions = {
-    from: "sayandip31072003@gmail.com",
+    from: process.env.gmail,
     to: req.body.email,
     subject: "Subject",
 
