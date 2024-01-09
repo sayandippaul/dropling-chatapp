@@ -502,6 +502,8 @@ body {
        color:white;
        width:140px;
        text-align: center;
+  display: none;
+
       }
       .unseenno{
   float:right;
@@ -512,6 +514,7 @@ body {
   width: 25px;
   text-align: center;
   margin-right: -10%;
+  display: none;
       }
   .center {
     height: 100vh;
