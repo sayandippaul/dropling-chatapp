@@ -21,7 +21,7 @@
 
   @media only screen and (max-device-width: 600px) {
     body{
-      zoom: 2.5;
+      /* zoom: 2.5; */
       margin-left: 200px;
       width: 1vh;
       height: 0.7vh;

@@ -173,7 +173,7 @@ i span{
 @media only screen and (max-device-width: 600px) {
   #frame{
       
-      zoom:2.0;
+      /* zoom:2.0; */
       /* margin-top: -20px;
       margin-left: -20px; */
   }
