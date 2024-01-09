@@ -853,12 +853,21 @@ app.post("/Sendmessage", bodyParser.json(), async (req, res) => {
              {
             $push: { "totaltoid.$.msgdetails": msgdesc },
             $set: { "totaltoid.$.lastmessage": msgdesc },
-            $cond: { if: { "nowuser": nowuser }, then:{$set: { "totaltoid.$.unseen": 0 } }, else: {$inc: { "totaltoid.$.unseen": 1 } } }
+            $cond: { if: { $and: [{
+
+              "nowuser": nowuser
+              
+              }, {
+              
+                 "online":1
+              
+              }]
+               }, then:{$set: { "totaltoid.$.unseen": 0 } }, else: {$inc: { "totaltoid.$.unseen": 1 } } }
 
           })
           //  console.log(updatemsg);
 
-
+//
         }
 
         // var dataToSave = await data.save();

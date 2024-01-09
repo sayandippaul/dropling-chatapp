@@ -488,33 +488,34 @@ body {
         object-fit: contain;
       }
       .typing{
-        font-size: xx-small;
+        /* font-size: xx-small; */
         color: greenyellow;
-        float: inline-end;
-        margin-top: 4%;
+        /* float: inline-end; */
+        /* margin-top: 4%; */
         visibility: hidden;
-        display: none;
+        /* display: none; */
       }
       .unseentime{
-      float:inline-end;
+      /* float:inline-end; */
       /* margin-right:-200px; */
-      margin-top:-33px;
+      /* margin-top:-33px; */
        color:white;
-       width:140px;
-       text-align: center;
-  display: none;
+       /* width:140px; */
+       /* text-align: center; */
+  /* display: none; */
+  float: right;
 
       }
       .unseenno{
   float:right;
-  margin-top:-9%; 
+  /* margin-top:-9%;  */
   border-radius:100%;
   background:greenyellow;
   color:black;
   width: 25px;
   text-align: center;
-  margin-right: -10%;
-  display: none;
+  /* margin-right: -10%; */
+  /* display: none; */
       }
   .center {
     height: 100vh;

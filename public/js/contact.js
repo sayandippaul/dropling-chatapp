@@ -340,10 +340,8 @@ for(var i=0;i<alluser[0].totaltoid.length;i++){
                               `+showonlinestatus+`
                               <img id="dpuser`+alluser[0].totaltoid[i].toid+`" style="object-fit:fill;height:40px;width:40px" src="dp/dp`+allexistuser[index].dp+`.png" alt="" />
                               <div class="meta">
-                                  <p class="name"><a>`+alluser[0].totaltoid[i].toname+`</a> <p id="typing`+alluser[0].totaltoid[i].toid+`" class="typing"> Typing...... <p></p>
+                                  <p class="name"><a>`+alluser[0].totaltoid[i].toname+`<sub id="typing`+alluser[0].totaltoid[i].toid+`" class="typing"> ......</sub><sup id="unseen`+alluser[0].totaltoid[i].toid+`" class="unseenno" style="visibility:hidden" ><strong>`+alluser[0].totaltoid[i].unseen+`</strong></sup>  <sup id="time`+alluser[0].totaltoid[i].toid+`" class="unseentime" ><strong>`+alluser[0].totaltoid[i].lastmessage[0].time+`</strong></sup></a>
                                   <p id="chatbody`+alluser[0].totaltoid[i].toid+`" class="preview">`+b+` `+alluser[0].totaltoid[i].lastmessage[0].chatbody+`</p>
-                                  <p id="unseen`+alluser[0].totaltoid[i].toid+`" class="unseenno" style="visibility:hidden" ><strong>`+alluser[0].totaltoid[i].unseen+`</strong></p>
-                                  <p id="time`+alluser[0].totaltoid[i].toid+`" class="unseentime" ><strong>`+alluser[0].totaltoid[i].lastmessage[0].time+`</strong></p>
                      
                               </div>
                             </div>
@@ -358,12 +356,13 @@ for(var i=0;i<alluser[0].totaltoid.length;i++){
                 `+showonlinestatus+`
 
                         <img id="dpuser`+alluser[0].totaltoid[i].toid+`" style="object-fit:fill;height:40px;width:40px" src="dp/dp`+allexistuser[index].dp+`.png" alt="" />
-                         <div class="meta">
-                        <p class="name"><a>`+alluser[0].totaltoid[i].toname+`</a> <p id="typing`+alluser[0].totaltoid[i].toid+`" class="typing"> Typing...... <p></p>
-                        <p id="chatbody`+alluser[0].totaltoid[i].toid+`" class="preview">`+b+` `+alluser[0].totaltoid[i].lastmessage[0].chatbody+`</p>
-                                  <p id="unseen`+alluser[0].totaltoid[i].toid+`" class="unseenno"><strong>`+alluser[0].totaltoid[i].unseen+`</strong></p>
-                                  <p id="time`+alluser[0].totaltoid[i].toid+`" class="unseentime"><strong>`+alluser[0].totaltoid[i].lastmessage[0].time+`</strong></p>
-                      </div>
+                         
+                      <div class="meta">
+                      <p class="name"><a>`+alluser[0].totaltoid[i].toname+`<sub id="typing`+alluser[0].totaltoid[i].toid+`" class="typing"> ......</sub><sup id="unseen`+alluser[0].totaltoid[i].toid+`" class="unseenno"  ><strong>`+alluser[0].totaltoid[i].unseen+`</strong></sup>  <sup id="time`+alluser[0].totaltoid[i].toid+`" class="unseentime" ><strong>`+alluser[0].totaltoid[i].lastmessage[0].time+`</strong></sup></a>
+                      <p id="chatbody`+alluser[0].totaltoid[i].toid+`" class="preview">`+b+` `+alluser[0].totaltoid[i].lastmessage[0].chatbody+`</p>
+         
+                  </div>
+               
                     </div>
                   </li>
                   `;
@@ -548,7 +547,8 @@ var showonlinestatus="";
 
   }
   var typinghtml=`
-  <p id="typing`+data.lastmessage.ownid+`" class="typing"> Typing...... <p>`;
+   <sub id="typing`+data.lastmessage.ownid+`" class="typing"> ......</sub>`;
+  // <p id="typing`+data.lastmessage.ownid+`" class="typing"> Typing...... <p>`;
 
   if(document.getElementById("chatbody"+data.lastmessage.ownid)!=null){
 
@@ -572,15 +572,24 @@ document.getElementById("showchat").innerHTML=`<li id="all`+data.lastmessage.own
                         <img id="dpuser`+data.lastmessage.ownid+`" style="object-fit:fill;height:40px;width:40px" src="dp/dp`+allexistuser[index].dp+`.png" alt="" />
                 `+showonlinestatus+`
 						<div class="meta">
-							<p id="name`+data.lastmessage.ownid+`" class="name"><a>`+data.lastmessage.ownname+`</a> `+typinghtml+`</p>
+							
+
+
+                        <p id="name`+data.lastmessage.ownid+`" class="name"><a>`+data.lastmessage.ownname+typinghtml+`<sup id="unseen`+data.lastmessage.ownid+`" class="unseenno"><strong>`+data.unseenforthisuser+`</strong></sup>  <sup id="time`+data.lastmessage.ownid+`" class="unseentime"><strong>`+data.lastmessage.time+`</strong></sup></a>
 							<p id="chatbody`+data.lastmessage.ownid+`" class="preview"> `+data.lastmessage.chatbody+`</p>
-					              <p id="unseen`+data.lastmessage.ownid+`" class="unseenno"><strong>`+data.unseenforthisuser+`</strong></p>
-					              <p id="time`+data.lastmessage.ownid+`" class="unseentime"><strong>`+data.lastmessage.time+`</strong></p>
+
+                     
 						</div>
+            
+            
 					</div>
 				</li>
 				`+document.getElementById("showchat").innerHTML;
 
+{/* <p id="name`+data.lastmessage.ownid+`" class="name"><a>`+data.lastmessage.ownname+`</a> `+typinghtml+`</p>
+							<p id="chatbody`+data.lastmessage.ownid+`" class="preview"> `+data.lastmessage.chatbody+`</p>
+					              <p id="unseen`+data.lastmessage.ownid+`" class="unseenno"><strong>`+data.unseenforthisuser+`</strong></p>
+					              <p id="time`+data.lastmessage.ownid+`" class="unseentime"><strong>`+data.lastmessage.time+`</strong></p> */}
 
 
   }
@@ -598,11 +607,9 @@ document.getElementById("showchat").innerHTML=`<li id="all`+data.lastmessage.own
                 `+showonlinestatus+`
 
 						<div class="meta">
-							<p class="name"><a>`+data.lastmessage.ownname+`</a> `+typinghtml+`</p>
-							<p id="chatbody`+data.lastmessage.ownid+`" class="preview"> `+data.lastmessage.chatbody+`</p>
-					              <p id="unseen`+data.lastmessage.ownid+`" class="unseenno"><strong>`+data.unseenforthisuser+`</strong></p>
-					              <p id="time`+data.lastmessage.ownid+`" class="unseentime"><strong>`+data.lastmessage.time+`</strong></p>
-						</div>
+            <p id="name`+data.lastmessage.ownid+`" class="name"><a>`+data.lastmessage.ownname+typinghtml+`<sup id="unseen`+data.lastmessage.ownid+`" class="unseenno"><strong>`+data.unseenforthisuser+`</strong></sup>  <sup id="time`+data.lastmessage.ownid+`" class="unseentime"><strong>`+data.lastmessage.time+`</strong></sup></a>
+            <p id="chatbody`+data.lastmessage.ownid+`" class="preview"> `+data.lastmessage.chatbody+`</p>
+</div>
 					</div>
 				</li>
 				`+document.getElementById("showchat").innerHTML;

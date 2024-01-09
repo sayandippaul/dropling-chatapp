@@ -94,10 +94,13 @@ body: JSON.stringify(user),
 .then((data) => { })
 .catch((err) => console.log(err));
 }
-
+function removeSpacesfromname(word) {
+  return word.replace(/\s+/g, '');
+}
 function submitd(){
    event.preventDefault();
    var name=document.getElementById("name").value;
+   name=removeSpacesfromname(name);
    var email=document.getElementById("email").value;
    var pass=document.getElementById("pass").value;
 
