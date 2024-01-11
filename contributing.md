@@ -25,7 +25,12 @@ To contribute to Dropling, you'll need to set up the project on your local machi
    git clone https://github.com/sayandippaul/dropling-chatapp
    ```
 
-2. Install dependencies:
+2. cd the repository:
+   ```bash
+     cd dropling-chatapp
+   ```
+
+3. Install dependencies:
    ```bash
    npm install
    ```
