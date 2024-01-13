@@ -1,4 +1,26 @@
-**Dropling: Elevate Your Chat Experience! 🚀🌐**
+# Dropling: Elevate Your Chat Experience! 🚀🌐
+
+<div align="center">
+ <p>
+
+[![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat)
+![Visitors](https://api.visitorbadge.io/api/visitors?path=sayandippaul%2Fdropling-chatapp%20&countColor=%23263759&style=flat)
+![GitHub forks](https://img.shields.io/github/forks/sayandippaul/dropling-chatapp)
+![GitHub Repo stars](https://img.shields.io/github/stars/sayandippaul/dropling-chatapp)
+![GitHub contributors](https://img.shields.io/github/contributors/sayandippaul/dropling-chatapp)
+![GitHub last commit](https://img.shields.io/github/last-commit/sayandippaul/dropling-chatapp)
+
+![GitHub repo size](https://img.shields.io/github/repo-size/sayandippaul/dropling-chatapp)
+
+![Github](https://img.shields.io/github/license/sayandippaul/dropling-chatapp)
+![GitHub issues](https://img.shields.io/github/issues/sayandippaul/dropling-chatapp)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/sayandippaul/dropling-chatapp)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/sayandippaul/dropling-chatapp)
+![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/sayandippaul/dropling-chatapp)
+
+ </p>
+ </div>
 
 Welcome to Dropling, the ultimate chat application that brings a whole new level of connectivity and communication to your fingertips! 📱💬 Whether you're looking to connect with friends, family, or make new acquaintances, Dropling offers a feature-rich environment designed to enhance your chatting experience.
 
