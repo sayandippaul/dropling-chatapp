@@ -1250,11 +1250,18 @@ function acceptcall(){
     alert("No call to accept");
     return;
   }
-  socket.emit("videocalljoined",{ownid:localStorage.getItem("userid"),toid:localStorage.getItem("toid"),link:videocalllink});
-  localStorage.setItem("vcroom",acceptroom);
+  console.log("accepting call");
+  socket.emit("videocalljoined", { ownid: localStorage.getItem("userid"), toid: localStorage.getItem("toid"), link: videocalllink });
+  localStorage.setItem("vcroom", acceptroom);
+  alert("video call joined");
+  setTimeout(function() {
+    window.location.replace(videocalllink);
+  }, 500);
+  // socket.emit("videocalljoined",{ownid:localStorage.getItem("userid"),toid:localStorage.getItem("toid"),link:videocalllink});
+  // localStorage.setItem("vcroom",acceptroom);
 
-  // window.open(videocalllink);
-  window.location.replace(videocalllink);
+  // // window.open(videocalllink);
+  // window.location.replace(videocalllink);
     
 }
 function rejectcall(){
@@ -1270,6 +1277,7 @@ var videocalllink="",acceptroom="";
 socket.on("startvideocall",function(data){
   if(data.ownid==localStorage.getItem("toid") && data.toid==localStorage.getItem("userid")){
     // alert("video call started");
+    videocalllink= `/videocall/${data.room}`;
     document.getElementById("ring").play(); 
 
     console.log("video call started");
@@ -1280,7 +1288,6 @@ socket.on("startvideocall",function(data){
 
      
 
-    videocalllink= `/videocall/${data.room}`;
     acceptroom=data.room;
     // if(confirm("Do you want to join the video call?")==true){
     // }
