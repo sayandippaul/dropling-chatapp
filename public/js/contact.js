@@ -280,6 +280,7 @@ function showcontacts(){
 
     fetch(url+"/Getinboxcontacts", {
       method: "POST",
+      // mode:"no-cors",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -321,6 +322,10 @@ for(var i=0;i<alluser[0].totaltoid.length;i++){
     if(a[0]=="r"){
         b="";
     }
+    if(alluser[0].totaltoid[i].lastmessage[0].chatbody.includes("<iframe")){
+      alluser[0].totaltoid[i].lastmessage[0].chatbody="&#128220;<strong>Document</strong>";
+    }
+
     var index = allexistuser.findIndex(item => item.userid === alluser[0].totaltoid[i].toid);
     var showonlinestatus="";
     if(allexistuser[index].online==1){
@@ -546,6 +551,10 @@ var showonlinestatus="";
     `;
 
   }
+  if(data.lastmessage.chatbody.includes("<iframe")){
+    data.lastmessage.chatbody="&#128220;<strong>Document</strong>";
+  }
+
   var typinghtml=`
    <sub id="typing`+data.lastmessage.ownid+`" class="typing"> ......</sub>`;
   // <p id="typing`+data.lastmessage.ownid+`" class="typing"> Typing...... <p>`;

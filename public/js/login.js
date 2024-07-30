@@ -70,8 +70,8 @@
     //         }); --}}
    var ds={ pass:"",email:"",value:"" };
               function submitd(k){
-               event.preventDefault();
-               if(k==0){
+                if(k==0){
+                 event.preventDefault();
    
                var email=document.getElementById("email").value;
                var pass=document.getElementById("pass").value;

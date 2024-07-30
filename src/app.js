@@ -4,8 +4,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3000
 const http = require("http").Server(app);
+let stream = require( './ws/stream' );
+let favicon = require( 'serve-favicon' );
 
 require("./db/conn");
 
@@ -31,6 +33,9 @@ usp.on("connection", async function (socket) {
 
   socket.broadcast.emit("onlineuser", { userid: socket.handshake.auth.token })
 
+
+
+// .videocall
 
   socket.on("disconnect", async function () {
     console.log("user disconnected");
@@ -466,9 +471,75 @@ try {
         
             socket.broadcast.emit("showtypingend",ds);
           })
+         
+          socket.on("playmusic",async function(ds){ 
+            console.log(ds);
+            socket.broadcast.emit("playmusic",ds);
+          }
+          )
+          socket.on("pausemusic",async function(ds){
+            socket.broadcast.emit("pausemusic",ds);
+          }
+          )
+          socket.on("closeplayer",async function(ds){ 
+            socket.broadcast.emit("closeplayer",ds);
+          }
+          )
+
+          socket.on("startvideocall",async function(ds){
+            console.log(ds);
+            socket.broadcast.emit("startvideocall",ds);
+          })
+          socket.on("endvideocall",async function(ds){
+            socket.broadcast.emit("endvideocall",ds);
+          })
+          socket.on("videocalljoined",async function(ds){
+            socket.broadcast.emit("videocalljoined",ds);
+          })
+          socket.on("videocallcancelled",async function(ds){
+            socket.broadcast.emit("videocallcancelled",ds);
+          })
 
 
 
+
+
+
+
+});
+
+
+
+
+
+io.on('connection', socket => {
+  socket.on('join-room', (roomId, userId, userName) => {
+      console.log('User joined:', userName);
+      socket.join(roomId);
+      setTimeout(() => {
+          socket.broadcast.to(roomId).emit('user-connected', userId, userName);
+      }, 1000)
+
+      socket.on('message', (message, userName) => {
+          io.to(roomId).emit('createMessage', message, userName);
+      });
+
+      socket.on('custom-disconnect', () => {
+          socket.broadcast.to(roomId).emit('user-disconnected', userId, userName);
+      });
+
+      socket.on('toggle-mic', (roomId, userId, userName, isEnabled) => {
+          socket.broadcast.to(roomId).emit('user-toggled-mic', userId, userName, isEnabled);
+      });
+
+      socket.on('toggle-cam', (roomId, userId, userName, isEnabled) => {
+          socket.broadcast.to(roomId).emit('user-toggled-cam', userId, userName, isEnabled);
+      });
+      socket.on('toggle-screen-share', (roomId, userId, userName, isEnabled) => {
+          socket.broadcast.to(roomId).emit('user-toggled-screen-share', userId, userName, isEnabled);
+      }   );  
+
+  });
 });
 // if (typeof window !== 'undefined') {
 //     var LocalStorage = require('node-localstorage').LocalStorage;
@@ -519,6 +590,17 @@ app.get("/login", (req, res) => {
   // res.send("hello")
   res.render("login");
 });
+app.use( favicon( path.join( __dirname, 'favicon.ico' ) ) );
+app.use( '/videoassets', express.static( path.join( __dirname, 'videoassets' ) ) );
+
+app.get("/videocall", (req, res) => {
+  // res.send("hello")
+  res.render("videocall");
+  // res.sendFile( __dirname + '/index.html' );
+
+});
+io.of( '/stream' ).on( 'connection', stream );
+
 
 app.get("/register", (req, res) => {
   // res.send("hello")
@@ -958,7 +1040,7 @@ app.post("/registernew", bodyParser.json(), async (req, res) => {
 
 app.post("/loginuser", bodyParser.json(), async (req, res) => {
 
-  //   console.log("hit")
+    // console.log(req.body)
   {
     try {
       // console.log("here" + req.body.email);
@@ -1278,3 +1360,15 @@ mailbody=`<div>
 http.listen(port, () => {
   // console.log(`server is running at port no ${port}`);
 })
+
+
+
+
+
+// videocall
+
+const { ExpressPeerServer } = require('peer');
+const peerServer = ExpressPeerServer(http, {
+    debug: true
+});
+app.use("/peerjs", peerServer);

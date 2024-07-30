@@ -34,7 +34,7 @@
     position: absolute;
     width:100%;
     margin:0;
-    height: 730px;
+    height: 930px;
     background: #5850c0;
     background-image: url("../chatpage/chatappbackground8.png");
     background-repeat: no-repeat;
@@ -294,7 +294,7 @@ background-size: cover;
   div.chat-messages div.chat {
     position: relative;
     width: 260px;
-    height: 340px;
+    height: 540px;
     background: #fcfcfe;
     background-image: url("../chatpage/chatappbackground8.png");
     background-repeat: no-repeat;
@@ -414,12 +414,17 @@ background-image: linear-gradient(315deg, #36096d 0%, #37d5d6 74%);
   }
 
   .ip-msg {
-    width: 80%;
+    width: 250px;
     position: relative;
-    margin-top: 620px;
+    /* margin-top: 815px; */
     font-size: 14px;
-    padding: 15px;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-left: 15px;
+    /* height: 15px; */
+    height: 50px;
     padding-right: 3%;
+    
     color: rgba(0, 0, 0, 0.9);
     color: rgb(0, 0, 0);
     font-weight: bolder;
@@ -437,10 +442,15 @@ background-image: linear-gradient(315deg, #60dfcd 0%, #1e9afe 74%);
 
   }
 
-  .ip-msg::placeholder {
+  #chatinput::placeholder {
     color: rgb(0, 0, 0);
     font-weight: bolder;
   }
+
+  #lowerbox{
+    display: grid;
+    grid-template-columns: auto auto ;
+   }
 
   div.msg-box span.btn-group {
     position: absolute;
@@ -509,9 +519,13 @@ background-image: linear-gradient(315deg, #60dfcd 0%, #1e9afe 74%);
     margin-bottom: 4%;
   }
 
-  #sendbutton {
+  .sendbutton {
     position: relative;
-    width: 10%;
+    /* margin-top: 815px; */
+    margin-left: 2px;
+
+    /* width: 15%; */
+    height: 60px;
     font-size: 14px;
     padding: 15px;
     /* background: rgba(252, 251, 251, 0.03); */
@@ -519,12 +533,12 @@ background-image: linear-gradient(315deg, #60dfcd 0%, #1e9afe 74%);
     border-radius: 10%;
     background-color: #182b3a;
 background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
-
+/* margin-top: -40px; */
 
   }
 
   #swipe {
-    border-radius: 15%;
+    /* border-radius: 15%; */
     color: white;
     padding: 4%;
     font-size: xx-small;
@@ -546,7 +560,7 @@ background-image: linear-gradient(315deg, #2234ae 0%, #191714 74%);
     padding-left: 15px;
     display:none;
     margin-left: 7px;
-    margin-top: -5%;
+    margin-top: -3%;
 background-color: #2234ae;
 background-image: linear-gradient(315deg, #2234ae 0%, #191714 74%);
    
@@ -753,7 +767,7 @@ animation: borderRotate var(--d) linear infinite forwards;
 #musicshow{
 margin-top:5%;
 height:22%;
-margin-left:-20%;
+margin-left:-2%;
 width:65%;
 border-radius:10%;
 margin-right:-20%;
@@ -767,7 +781,10 @@ width:6%;margin-right:-8%;color: aqua;
 }
 
 .musiccontrol{
-width: 90%;height:30px;margin-top:5%;
+width: 88%;height:30px;margin-top:5%;
+border-radius: 40px;
+background-image: url(../demopage/appback6.png);
+
 }
 #swipehr{
 visibility: hidden;
@@ -949,4 +966,23 @@ inherits: true;
   --gradY: 0%;
 }
 
+}
+
+
+#progress-container {
+  margin-top: 790px;
+  position:relative;
+  /* display: none;
+   */
+   visibility: hidden;
+}
+#progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #f3f3f3;
+}
+#progress {
+  width: 0;
+  height: 100%;
+  background-color: #3c84f8;
 }

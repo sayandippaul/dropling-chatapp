@@ -133,7 +133,7 @@ function change(){
 
 
 
-let voices = speechSynthesis.getVoices();
+        let voices = speechSynthesis.getVoices();
            function getVoices() {
          if(!voices.length){
          // some time the voice will not be initialized so we can call speak with empty string

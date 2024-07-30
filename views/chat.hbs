@@ -4,11 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Drpling chatpage</title>
+  <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js" integrity="sha512-VJ6+sp2E5rFQk05caiXXzQd1wBABpjEj1r5kMiLmGAAgwPItw1YpqsCCBtq8Yr1x6C49/mTpRdXtq8O2RcZhlQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <link rel="stylesheet" href="css/chat.css">
   
+ <script src="https://apis.google.com/js/api.js"></script>
+ <script type="text/javascript" id="www-widgetapi-script" src="https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js" async=""></script>
+<script src="https://www.youtube.com/player_api"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script async defer src="https://accounts.google.com/gsi/client"></script>
+<script async defer src="https://apis.google.com/js/api.js"></script>
 </head>
 
 <body>
@@ -99,9 +108,21 @@
             </li>
             <li   class="" id="musicplayer" >
               <input id="musicshow" type="text" disabled="true" >
-              <input   class="fa fa-upload musicupload" type="file" id="songfile"  accept="audio/mp3, audio/mp4,audio/mpeg"  id="myFile" name="filename">
+              {{!-- <input   class="fa fa-link musicupload" type="button"  id="songfile"  accept="audio/mp3, audio/mp4,audio/mpeg"  id="myFile" name="filename" placeholder="&#9836;"> --}}
+              <button style="background-color: aqua; margin-right: -5px; padding:2px;border-radius:20px" onclick="startplay()">
+                &#9836;
+              </button>
+              <button id="closeplayer" style="background-color: aqua;  margin-right: -5px; padding:2px;border-radius:20px" disabled onclick="closeplayer()">
+                ❌
+              </button>
              
-               <audio controls class="musiccontrol"  id="audio_player" ></audio>
+               {{!-- <audio controls class="musiccontrol"  id="audio_player" ></audio> --}}
+               <button class="musiccontrol" onclick="startvideocall()" style="color: azure;"  id="audio_player" >Video Call 🎦</button>
+               <div id="videocallbuttons" style="display: none;">
+
+               <button  onclick="acceptcall()" style="color: black; background:rgb(142, 226, 142);margin-top:5px;border-radius:10px;padding:5px;" >Recieve 🎦</button>
+               <button  onclick="rejectcall()" style="color: azure; background:rgb(233, 25, 25);margin-top:5px;border-radius:10px;padding:5px;" >Reject 🎦</button>
+               </div>
               </li>
 
 
@@ -134,6 +155,26 @@
         <div class="chat-messages">
           <div class="chat">
             <div class="chat-content clearfix">
+              <div id="videoplayersection" style="display: none;">
+
+              <div id="videoplayer1">
+
+              <iframe width="100%" height="150" id="videoplayer" 
+src="">
+</iframe>
+{{!-- <video width="100%" id="videoplayer" height="150" controls>
+  <source src="" type="video/mp4"> --}}
+
+              </div>
+              {{!-- <div id="videobuttons" style="display: none;margin-top:50px;">
+
+<input type="text" placeholder="enter time">
+<button>▶️</button>
+<button>&#9208;</button>
+              </div> --}}
+              </div>
+
+
               <div id="showchat">
                 {{!--
                 <span class="friend last">
@@ -176,7 +217,7 @@
           </div>
         <div>
           <i class="fa fa-close" onclick="closeswipe()" id="closeswipe" ></i>
-    <input type="text" disabled="true" id="showswipe" placeholder="Lets's Say" />
+          <div id="showswipe"></div>
         </div>
       
         </div>
@@ -192,7 +233,7 @@
             <i class="fa fa-comments-o"></i>
           </li>
           <li>
-            <i class="fa fa-lock"></i>
+            <i class="fa fa-sign-in" onclick="handleAuthClick()"></i>
           </li>
           <li >
             <i id="changeheart1" class="fa fa-lock "></i>
@@ -211,11 +252,34 @@
 
     </div>
     
-    <input type="text" id="chatinput" class="ip-msg"  placeholder="Lets's Say" />
-    <button id="sendbutton" onclick="sendmessage()">
-      <i class="fa fa-send"></i>
-<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    {{!-- <input  /> --}}
+    <div id="progress-container">
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+    </div>
 
+    <div id="lowerbox" >
+   
+
+    <div id="chatboxshow">
+
+    <textarea type="text" id="chatinput" class="ip-msg" rows="1" cols="1"  placeholder="Lets's Say"></textarea>
+    </div>
+   <div id="buttons">
+       <button class="sendbutton" onclick="sendmessage(2)">
+      <i class="fa fa-photo"></i>
+      <button class="sendbutton" onclick="sendmessage(3)">
+      <i class="fa fa-microphone"></i>
+       <button class="sendbutton" onclick="sendmessage(1)">
+      <i class="fa fa-send"></i>
+    <input type="file" id="uploadpic" multiple style="display: none;">
+    <button style="display: none;" onclick="handleAuthClick()" id="signup"></button>
+   </div>
+
+    </div>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+   
     </button>
   </div>
 
