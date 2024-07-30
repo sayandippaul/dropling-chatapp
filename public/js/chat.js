@@ -1278,9 +1278,9 @@ socket.on("startvideocall",function(data){
 
       // Extract room ID from URL
 
-    window.location.href = `/videocall/${data.room}`;
+     
 
-    videocalllink=roomId;
+    videocalllink= `/videocall/${data.room}`;
     acceptroom=data.room;
     // if(confirm("Do you want to join the video call?")==true){
     // }
