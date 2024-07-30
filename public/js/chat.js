@@ -1248,6 +1248,8 @@ var videocalllink="",acceptroom="";
 socket.on("startvideocall",function(data){
   if(data.ownid==localStorage.getItem("toid") && data.toid==localStorage.getItem("userid")){
     // alert("video call started");
+    document.getElementById("ring").play(); 
+
     console.log("video call started");
 
     videocalllink=data.link;
@@ -1437,7 +1439,7 @@ if(n==i+1){
   console.log(allsharablelinks);
 
 
-  alert("File uploaded successfully");
+  // alert("File uploaded successfully");
   // uploadsection.style.display="block";
   uploadsection.style.visibility="visible";
 
