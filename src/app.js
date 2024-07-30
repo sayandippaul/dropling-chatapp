@@ -6,6 +6,7 @@ const app = express();
 const path = require("path");
 const port = process.env.PORT || 3000
 const http = require("http").Server(app);
+// const http="dropling.onrender.com";
 let stream = require( './ws/stream' );
 let favicon = require( 'serve-favicon' );
 
@@ -508,6 +509,18 @@ try {
 
 });
 
+const { v4: uuidv4 } = require('uuid');
+app.get('/create', (req, res) => {
+    // res.redirect(`/${uuidv4()}`);
+    // var link=
+    res.json(uuidv4());
+});
+
+app.get('/videocall/:room', (req, res) => {
+  // console.log(room);
+  
+    res.render("videocall", { roomId: req.params.room });
+});
 
 
 

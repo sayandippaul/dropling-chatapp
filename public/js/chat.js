@@ -1221,7 +1221,29 @@ function startvideocall(){
   // var link=`${ location.origin }?room=`+localStorage.getItem("username")+`_`+localStorage.getItem("tousername")+`_${Math.floor(Math.random() * 100)  }`;
   var room=localStorage.getItem("username")+`_`+localStorage.getItem("tousername");
   localStorage.setItem("vcroom",room);
-  socket.emit("startvideocall",{ownid:localStorage.getItem("userid"),toid:localStorage.getItem("toid"),link:url+"/videocall",room:room});
+  fetch(url+"/create", {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      // var link="https://dropling.onrender.com/videocall"+data;
+      socket.emit("startvideocall",{ownid:localStorage.getItem("userid"),toid:localStorage.getItem("toid"),link:url+"/videocall/"+data,room:data});
+      // window.open(data.link);
+      // window
+    }
+    )
+    .catch((err) => console.log(err));
+
+
 }
 function acceptcall(){
   if(videocalllink=="" || acceptroom==""){
@@ -1252,7 +1274,13 @@ socket.on("startvideocall",function(data){
 
     console.log("video call started");
 
-    videocalllink=data.link;
+    // var roomId = new URL(data.link).pathname.slice(1);
+
+      // Extract room ID from URL
+
+    window.location.href = `/${data.room}`;
+
+    videocalllink=roomId;
     acceptroom=data.room;
     // if(confirm("Do you want to join the video call?")==true){
     // }
