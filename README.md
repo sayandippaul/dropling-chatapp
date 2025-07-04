@@ -18,6 +18,8 @@
     <img src="https://img.shields.io/github/issues-closed-raw/sayandippaul/dropling-chatapp" alt="Closed Issues">
     <img src="https://img.shields.io/github/issues-pr/sayandippaul/dropling-chatapp" alt="PRs">
     <img src="https://img.shields.io/github/issues-pr-closed/sayandippaul/dropling-chatapp" alt="Closed PRs">
+    <img src="https://github.com/sayandippaul/dropling-chatapp/blob/main/image_2025-07-04_23-49-23.png" alt="Closed PRs">
+    <img src="photo_1_2025-07-04_23-50-50.jpg" alt="Closed PRs">
   </p>
 </div>
 
