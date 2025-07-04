@@ -18,9 +18,7 @@
     <img src="https://img.shields.io/github/issues-closed-raw/sayandippaul/dropling-chatapp" alt="Closed Issues">
     <img src="https://img.shields.io/github/issues-pr/sayandippaul/dropling-chatapp" alt="PRs">
     <img src="https://img.shields.io/github/issues-pr-closed/sayandippaul/dropling-chatapp" alt="Closed PRs">
-    <img src="https://github.com/sayandippaul/dropling-chatapp/blob/main/image_2025-07-04_23-49-23.png" alt="Closed PRs">
-    <img src="photo_1_2025-07-04_23-50-50.jpg" alt="Closed PRs">
-  </p>
+    </p>
 </div>
 
 ---
@@ -35,6 +33,9 @@ Welcome to **Dropling 2.0**, the next-gen full-stack chat application with every
   <img src="https://github.com/arghadipmanna101/dropling-chatapp/assets/130065095/e0ccb689-e796-403d-9284-b8c2e29c83b0" alt="chat" width="200"/>
   <img src="https://github.com/arghadipmanna101/dropling-chatapp/assets/130065095/71e4764b-5e3b-4080-9002-90c51c782e39" alt="account" width="200"/>
   <img src="https://github.com/arghadipmanna101/dropling-chatapp/assets/130065095/cd31ccdc-d466-4619-b4d7-015ee88a6527" alt="setting" width="200"/>
+  <img src="https://github.com/sayandippaul/dropling-chatapp/blob/main/image_2025-07-04_23-49-23.png" alt="Closed PRs">
+    <img src="photo_1_2025-07-04_23-50-50.jpg" alt="Closed PRs">
+  
 </p>
 
 ---
